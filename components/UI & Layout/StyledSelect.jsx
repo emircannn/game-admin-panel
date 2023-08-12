@@ -38,7 +38,7 @@ const StyledSelect = ({
             
             {open && <ul 
             style={{width, borderRadius, height: dropdownHeight}}
-            className='absolute left-0 top-[110%] glass-light border border-secondary-light/50 p-[10px] flex flex-col gap-[5px] overflow-y-auto z-50'>
+            className='absolute left-0 top-[110%] glass border border-secondary-light/50 p-[10px] flex flex-col gap-[5px] overflow-y-auto z-50'>
                     {options?.map((option, i) => (
                         <li 
                         key={i}

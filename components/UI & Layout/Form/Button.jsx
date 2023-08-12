@@ -4,7 +4,7 @@ const Button = ({
     px= '30',
     py= '15',
     mt= '20',
-    bgColor = 'graident',
+    bgColor = 'rgb(244 63 94)',
     textColor = 'white',
     textSize = '16px',
     fontWeight = 'semibold',
@@ -32,11 +32,11 @@ const Button = ({
         paddingBottom : `${py}px`,
         marginTop : `${mt}px`,
         fontSize: textSize,
+        backgroundColor: bgColor
     }}
     onClick={onClick}
     disabled={disabled}
     className={`
-    bg-${bgColor} 
     text-${textColor} 
     gap-[6px] 
     align-cntr 

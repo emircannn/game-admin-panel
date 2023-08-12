@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import User from '../../public/icons/user.svg'
+import User from '@/public/icons/user.svg'
 
 const Avatar = ({
     width = '60',

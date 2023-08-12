@@ -28,7 +28,11 @@ const nextConfig = {
         return config
       },
     
-      // ...other config
+      reactStrictMode: true,
+      swcMinify: true,
+      experimental :{ 
+        appDir: true
+      }
 }
 
 module.exports = nextConfig

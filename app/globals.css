@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 *{
-    font-family: 'Exo 2', sans-serif;
+    
     box-sizing: border-box;
     user-select: none;
     scroll-behavior: smooth;
@@ -54,7 +54,7 @@ backdrop-filter: blur(8px);
   }
 
   .container {
-    @apply xl:w-[1200px] w-full max-xl:px-[20px] max-md:px-[10px] mx-auto
+    @apply xl:w-[1280px] w-full max-xl:px-[20px] max-md:px-[10px] mx-auto
   }
 
   .heading {
