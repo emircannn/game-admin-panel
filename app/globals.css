@@ -2,26 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+*{
+    font-family: 'Exo 2', sans-serif;
+    box-sizing: border-box;
+    user-select: none;
+    scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.glass {
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.185);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
   }
-}
+.glass-light {
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+  }
+.search {
+    /* From https://css.glass */
+background: #0502274d;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+  }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  .clip-polygon {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+  }
+
+  .discount-polygon {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 18% 100%);
+  }
+
+  .opacity-gradient {
+    background: rgb(5,2,39);
+    background: linear-gradient(0deg, rgba(5,2,39,1) 16%, rgba(9,7,29,0) 100%);
+    background-blend-mode: overlay;
+  }
+
+  body {
+    background: rgb(11,7,55);
+    background: linear-gradient(90deg, rgba(11,7,55,1) 0%, rgba(5,2,39,1) 60%, rgba(9,7,29,1) 100%);
+  }
+
+  .button {
+    @apply text-white text-[13px] 450:text-[16px] px-[18px] duration-300 transition-all rounded-xl font-medium py-[8px] bg-button hover:bg-secondary
+  }
+
+  .container {
+    @apply xl:w-[1200px] w-full max-xl:px-[20px] max-md:px-[10px] mx-auto
+  }
+
+  .heading {
+    @apply text-white text-[18px] 450:text-[24px] font-semibold
+  }
+  .align-cntr {
+    @apply flex items-center justify-center
+  }
+  .align-lft {
+    @apply flex items-center justify-start
+  }
+  .align-rght {
+    @apply flex items-center justify-end
+  }
+  .align-btwn {
+    @apply flex items-center justify-between
+  }
+
+  /** Sroll */ 
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #120e47;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #b6b6f8;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #eb5f5f;
+  }
+  
