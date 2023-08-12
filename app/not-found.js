@@ -13,7 +13,7 @@ const NotFound  = () => {
     const [hover, setHover] = useState(false)
 
   return (
-        <div className='w-full h-screen flex flex-col items-center justify-center gap-[80px] overflow-hidden'>
+        <div className='w-full h-full flex flex-col items-center justify-center gap-[80px] overflow-hidden absolute top-0 left-0 z-50 bg-gradient-to-tl from-primary-dark to-primary-lighter'>
         <div className='flex flex-col justify-center items-center gap-[20px]'>
             <span className='text-4xl text-secondary font-semibold'>404</span>
 
