@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <Header/>
       <Container>
       <Sidebar/>
-      <div className='h-[calc(100vh_-_106px)] overflow-y-auto p-[20px]'>
+      <div className='h-[calc(100vh_-_106px)] overflow-y-auto p-[20px] w-full'>
         {children}
       </div>
       </Container>

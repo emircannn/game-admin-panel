@@ -1,7 +1,10 @@
 'use client';
+
+import GamePage from "@/components/Pages/Game/GamePage";
+
 const Page = () => {
   return (
-    <div>Page</div>
+    <GamePage/>
   )
 }
 

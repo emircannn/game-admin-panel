@@ -2,21 +2,35 @@
 import Card from './Card'
 import data from '../sidebarData'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import gameData from '../oyunData'
 
 const Sidebar = () => {
 
     const pathname = usePathname()
 
-    const currentPage = data?.find((item) => item.href === pathname)
+    const [currentData, setCurrentData] = useState()
+
+    
+    useEffect(() => {
+        if (pathname.includes('/oyunlar')) {
+            setCurrentData(gameData)
+        }
+      else {
+          setCurrentData(data)
+        }
+    }, [pathname])
+    
+    const currentPage = currentData?.find((item) => item.href === pathname)
 
   return (
     <div className='w-[240px] shrink-0 h-[calc(100vh_-_106px)] bg-primary-lighter px-[10px] py-[20px]'>
             <div className='mb-[30px] text-white text-xl font-medium flex items-center justify-center'>
-            {currentPage.title}
+            {currentPage?.title}
             </div>
 
             <div className='grid-cols-2 grid content-start  gap-[10px]'>
-            {data?.map((item,i) =>(
+            {currentData?.map((item,i) =>(
                 <Card
                 key={i}
                 svg={item.icon}

@@ -23,12 +23,6 @@ const data = [
       color: "#2FAC66",
     },
     {
-      title: "Kategori",
-      href: "/kategori",
-      icon: <Category />,
-      color: "#f75821",
-    },
-    {
       title: "Siparişler",
       href: "/siparisler",
       icon: <Orders />,
@@ -41,12 +35,6 @@ const data = [
       color: "#6DD432",
     },
     {
-      title: "Banner",
-      href: "/banner",
-      icon: <Banner />,
-      color: "#3AADFC",
-    },
-    {
       title: "Kullancılar",
       href: "/kullanicilar",
       icon: <Users />,
@@ -57,12 +45,6 @@ const data = [
       href: "/degerlendirmeler",
       icon: <Reviews />,
       color: "#FFCC00",
-    },
-    {
-      title: "İndirim",
-      href: "/indirim",
-      icon: <Discount />,
-      color: "#9d9dc9",
     },
     {
       title: "Ayarlar",

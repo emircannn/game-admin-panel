@@ -22,7 +22,8 @@ const Input = ({
     value,
     errors,
     touched,
-    textCenter=false
+    textCenter=false,
+    minWidth
 }) => {
 
   return (
@@ -50,6 +51,7 @@ const Input = ({
     minLength={minLength}
     style={{
         width, 
+        minWidth,
         height: `${height}px`, 
         minHeight: `${height}px`, 
         maxHeight: `${height}px`, 
