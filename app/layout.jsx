@@ -3,6 +3,7 @@ import './globals.css'
 import { Exo_2 } from 'next/font/google'
 import Container from '@/components/UI & Layout/Container'
 import Sidebar from '@/components/UI & Layout/Sidebar'
+import DiscountModal from '@/components/modals/DiscountModal'
 
 const font = Exo_2({ subsets: ['latin']})
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }) {
       <Header/>
       <Container>
       <Sidebar/>
+      <DiscountModal/>
       <div className='h-[calc(100vh_-_106px)] overflow-y-auto p-[20px] w-full'>
         {children}
       </div>

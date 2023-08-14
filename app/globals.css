@@ -89,3 +89,60 @@ backdrop-filter: blur(8px);
     background-color: #eb5f5f;
   }
   
+
+  .rdrCalendarWrapper{
+    color: #ffffff;
+    font-size: 14px;
+    border-radius: 16px;
+    overflow: hidden;
+    background-color: #09071d;
+    width: 100%;
+  }
+  
+  .rdrDateDisplayItem input{
+    cursor: pointer;
+    height: 2.5em;
+    line-height: 2.5em;
+    border: 0px;
+    background: transparent;
+    width: 100%;
+    color: #b6b6f8;
+  }
+
+  .rdrMonth {
+    width: 100%;
+  }
+
+  .rdrMonthAndYearPickers select{
+    -moz-appearance: none;
+         appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    background: transparent;
+    padding: 10px 30px 10px 10px;
+    border-radius: 4px;
+    outline: 0;
+    color: #b6b6f8;
+    background: #09071d !important;
+    background-position: right 8px center;
+    cursor: pointer;
+    text-align: center
+  }
+
+  .rdrNextPrevButton:hover{
+    background: #b6b6f8;
+  }
+
+  .rdrDay {
+    background: transparent;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    border: 0;
+    padding: 0;
+    line-height: 3.000em;
+    height: 3.000em;
+    text-align: center;
+    color: #fff !important;
+  }

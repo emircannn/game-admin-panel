@@ -1,35 +1,37 @@
 import Button from "@/components/UI & Layout/Form/Button"
-import Arrow from '@/public/icons/arrow.svg';
-import { useState } from 'react';
+import GameSkeleton from "../Game/Skeleton";
+import DiscountedBox from "./DiscountedBox";
+import useDiscountModal from "@/hooks/useDiscountModal";
 
 
 const DiscountPage = () => {
 
-    const [weeklyDis, setWeeklyDis] = useState(false)
+    const discountModal = useDiscountModal()
 
   return (
     <div className="flex flex-col gap-[20px]">
         <div className="flex items-center justify-between border-b border-secondary pb-[10px]">
+
             <h4 className="text-xl font-semibold text-white">
-                Süreli İndirim
+                İndirim
             </h4>
 
             <div className="flex gap-[20px] items-center">
                 <Button
-                    title='İndirim Ekle'
+                    title='Ekle'
                     height="40px"
+                    onClick={() => discountModal.onOpen()}
                 />
-                <Button
-                    title='Toplu İndirim Ekle'
-                    height="40px"
-                />
-
-                <button
-                onClick={() => setWeeklyDis(!weeklyDis)}
-                >
-                    <Arrow fill='#8585f5' width='20' height='20' className={`${weeklyDis ? 'rotate-[270deg]' : 'rotate-90'} duration-300`}/>
-                </button>
             </div>
+        </div>
+
+        <div className='grid grid-cols-3 gap-[20px] w-full'>
+            <DiscountedBox/>
+            <DiscountedBox/>
+            <DiscountedBox/>
+            <DiscountedBox/>
+            <DiscountedBox/>
+            <GameSkeleton/>
         </div>
     </div>
   )
