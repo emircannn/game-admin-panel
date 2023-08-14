@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -33,5 +35,19 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/line-clamp'),
+    plugin(({theme, addUtilities}) => {
+      const neonUtilities = {};
+      const colors = theme('colors')
+      for (const color in colors) {
+        if (typeof colors[color] === 'object') {
+          const color1 = colors[color]['500']
+          const color2 = colors[color]['700']
+          neonUtilities[`.neon-${color}`] = {
+            boxShadow: `0 0 5px ${color1}, 0 0 15px ${color2}`
+          }
+        }
+      }
+      addUtilities(neonUtilities)
+    })
   ]
 }

@@ -23,6 +23,18 @@ const data = [
       color: "#2FAC66",
     },
     {
+      title: "Değerlendirme",
+      href: "/degerlendirmeler",
+      icon: <Reviews />,
+      color: "#FFCC00",
+    },
+    {
+      title: "Kullancılar",
+      href: "/kullanicilar",
+      icon: <Users />,
+      color: "#a03d3d",
+    },
+    {
       title: "Siparişler",
       href: "/siparisler",
       icon: <Orders />,
@@ -33,18 +45,6 @@ const data = [
       href: "/sepet",
       icon: <Cart />,
       color: "#6DD432",
-    },
-    {
-      title: "Kullancılar",
-      href: "/kullanicilar",
-      icon: <Users />,
-      color: "#a03d3d",
-    },
-    {
-      title: "Değerlendirme",
-      href: "/degerlendirmeler",
-      icon: <Reviews />,
-      color: "#FFCC00",
     },
     {
       title: "Ayarlar",

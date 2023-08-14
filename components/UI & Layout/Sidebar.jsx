@@ -8,10 +8,7 @@ import gameData from '../oyunData'
 const Sidebar = () => {
 
     const pathname = usePathname()
-
     const [currentData, setCurrentData] = useState()
-
-    
     useEffect(() => {
         if (pathname.includes('/oyunlar')) {
             setCurrentData(gameData)

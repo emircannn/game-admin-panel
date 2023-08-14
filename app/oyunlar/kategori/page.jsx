@@ -1,8 +1,10 @@
 'use client';
 
+import CategoryPage from "@/components/Pages/Category";
+
 const Page = () => {
   return (
-    <div>Page</div>
+    <CategoryPage/>
   )
 }
 

@@ -1,8 +1,10 @@
 'use client';
 
+import DiscountPage from "@/components/Pages/Discount.jsx";
+
 const Page = () => {
   return (
-    <div>Page</div>
+    <DiscountPage/>
   )
 }
 

@@ -5,10 +5,12 @@ import Image from "next/image"
 import {BsFillEyeFill} from 'react-icons/bs'
 
 const Game = () => {
+
+    
   return (
-    <div className="w-full rounded-xl aspect-square bg-primary-lighter overflow-hidden">
+    <div className="w-full rounded-xl aspect-square bg-primary-lighter overflow-hidden duration-300 hover:neon-blue">
         <div className="w-full h-[60%] relative overflow-hidden shrink-0 group">
-            <Image alt="" src='/images/fifa.jpg' fill quality={100} className="object-cover hover:scale-110 duration-300"/>
+            <Image alt="" src='/images/fifa.jpg' priority fill quality={100} className="object-cover hover:scale-110 duration-300"/>
 
             <span className="absolute w-full h-full top-0 left-0 bg-black/50 flex cursor-pointer items-center justify-center flex-col 
             gap-[10px] opacity-0 group-hover:opacity-100 duration-300">

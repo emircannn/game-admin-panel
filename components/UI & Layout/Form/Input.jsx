@@ -9,7 +9,7 @@ const Input = ({
     borderColor = tailwindConfig.theme.extend.colors.secondary,
     textColor = tailwindConfig.theme.extend.colors.secondary,
     bgColor = tailwindConfig.theme.extend.colors.primary,
-    fontSize = '18', 
+    fontSize = '16', 
     border= '2',
     minLength,
     onChange,

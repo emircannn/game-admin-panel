@@ -20,7 +20,8 @@ const Card = ({
     <Link href={href}>
         <div 
         style={{borderColor: isHref ? color : '#8585f5'}}
-        className="w-full aspect-square rounded-xl bg-primary-dark duration-300 hover:scale-105 cursor-pointer flex items-center justify-center border-2 flex-col gap-[4px]">
+        className={`w-full aspect-square rounded-xl bg-primary-dark duration-300 hover:neon-blue cursor-pointer flex items-center 
+        justify-center border-2 flex-col gap-[4px] ${isHref && 'neon-blue'}`}>
         {
         cloneElement(svg,
           {
