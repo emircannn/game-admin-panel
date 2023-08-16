@@ -1,11 +1,16 @@
 'use clinet';
 
-import Editor from "./Editor";
 import GameMedias from "./GameMedias";
 import Info from "./Info";
 import SelectBanner from "./SelectBanner";
 import React, { useState, useEffect } from 'react';
 import SimilarsGame from "./SimilarsGame";
+import dynamic from 'next/dynamic';
+
+const Editor = dynamic(() => import('./Editor'), { 
+  ssr: false 
+});
+
 
 
 const AddGame = () => {

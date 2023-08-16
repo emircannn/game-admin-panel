@@ -14,7 +14,6 @@ const EditorWrapper = () => {
         data="<p>Bir yazı girin...</p>"
         onChange={ (event, editor) => {
           const data = editor.getData();
-          console.log( { event, editor, data } );
         } }
       /> 
     </div>
