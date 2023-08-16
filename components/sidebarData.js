@@ -1,12 +1,9 @@
 import Dashboard from '@/public/icons/dashboard.svg';
 import Game from '@/public/icons/game.svg';
-import Category from '@/public/icons/category.svg';
-import Banner from '@/public/icons/banner.svg';
 import Cart from '@/public/icons/cart.svg';
 import Users from '@/public/icons/user.svg';
 import Reviews from '@/public/icons/reviews.svg';
 import Orders from '@/public/icons/orders.svg';
-import Discount from '@/public/icons/discount.svg';
 import Settings from '@/public/icons/settings.svg';
 
 const data = [

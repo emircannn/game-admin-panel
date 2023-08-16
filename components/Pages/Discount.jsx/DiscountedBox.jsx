@@ -18,9 +18,16 @@ const DiscountedBox = () => {
         </div>
 
         <div className="p-[10px] w-full h-[40%] flex flex-col gap-[10px] justify-between">
-                <h4 className=" font-semibold text-[16px] text-white">
-                    Fifa 23
-                </h4>
+                <div className="flex items-center justify-between gap-[10px]">
+                    <h4 className=" font-semibold text-[16px] text-white line-clamp-1">
+                        Fifa 23
+                    </h4>
+
+                    <span className="text-[12px] font-semibold text-white px-[8px] py-[3px] rounded-full bg-primary-dark neon-yellow">
+                        - %25
+                    </span>
+                </div>
+
                 <span className=" font-semibold text-[14px] text-secondary">
                     Kalan Süre: 14 s 57 dk
                 </span>

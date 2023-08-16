@@ -4,11 +4,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState, useEffect } from 'react';
 import GameSkeleton from "../Game/Skeleton";
 import CategoryBox from "./CategoryBox";
+import useAddCategory from "@/hooks/useAddCategory";
 
 const CategoryPage = () => {
 
     const {push} = useRouter()
     const search = useSearchParams()
+
+    const categoryModal = useAddCategory()
 
     const name = search.get('name')
     const [searchInput, setSearchInput] = useState(name ? name : '')
@@ -56,7 +59,7 @@ const CategoryPage = () => {
                 width='235px'
                 title='Kategori Ekle'
                 bgColor='#8585f5'
-            hoverv2='hover:bg-[#8585f5]'
+                onClick={() => categoryModal.onOpen()}
             />
             </div>
         </div>

@@ -9,7 +9,9 @@ import Button from "@/components/UI & Layout/Form/Button.jsx";
 import tailwindConfig from "@/tailwind.config.js";
 
 
-const FilterSide = () => {
+const FilterSide = ({
+  noSecondAction=false
+}) => {
 
     const {push} = useRouter()
     const search = useSearchParams()
@@ -70,7 +72,7 @@ const FilterSide = () => {
   return (
     <>
       <div className="grid grid-cols-4 gap-[20px] w-full">
-        <StyledSelect
+            <StyledSelect
                 dropdownHeight='150px'
                 width='100%'
                 options={platformOptions}
@@ -123,14 +125,15 @@ const FilterSide = () => {
           onClick={() => clearFilter()}
         />
         </div>
-        <div className="shrink-0">
+        {!noSecondAction &&<div className="shrink-0">
         <Button
           width='235px'
           title='Oyun Ekle'
           bgColor='#8585f5'
           hoverv2='hover:bg-[#8585f5]'
+          onClick={() => push('/oyunlar/ekle')}
         />
-        </div>
+        </div>}
       </div>
     </>
   )

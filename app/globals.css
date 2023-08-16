@@ -31,7 +31,7 @@ backdrop-filter: blur(8px);
   }
 
   .clip-polygon {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
   }
 
   .discount-polygon {
@@ -145,4 +145,8 @@ backdrop-filter: blur(8px);
     height: 3.000em;
     text-align: center;
     color: #fff !important;
+  }
+
+  .ck {
+    height: 400px;
   }

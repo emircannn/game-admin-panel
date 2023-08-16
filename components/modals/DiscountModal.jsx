@@ -4,7 +4,7 @@ import useDiscountModal from '@/hooks/useDiscountModal'
 import Modal from './Modal'
 import FilterSide from './FilterSide';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Calendar from '../UI & Layout/Form/Calendar';
 import Input from '../UI & Layout/Form/Input';
 
@@ -12,7 +12,8 @@ import Input from '../UI & Layout/Form/Input';
 const DiscountModal = () => {
 
     const discountModal = useDiscountModal()
-
+    
+    const [isChecked, setIsChecked] = useState(false);
     const [selectedRange, setSelectedRange] = useState([
         {
           startDate: new Date(),
@@ -20,13 +21,13 @@ const DiscountModal = () => {
           key: 'selection'
         }
       ]);
+      
 
       const handleSelect = (ranges) => {
         setSelectedRange([ranges.selection]);
       };
     
 
-    const [isChecked, setIsChecked] = useState(false);
     const handleCheckboxChange = () => {
       setIsChecked(!isChecked);
     };

@@ -1,6 +1,7 @@
 'use client'
 
 import Button from "@/components/UI & Layout/Form/Button"
+import StyledRated from "@/components/UI & Layout/StyledRated"
 import Image from "next/image"
 import {BsFillEyeFill} from 'react-icons/bs'
 
@@ -31,12 +32,18 @@ const Game = () => {
                 </span>
             </div>
             <div className="flex items-center justify-between text-white text-[14px] font-medium">
+                <div className="flex items-center gap-[8px]">
                 <span className="line-through">
                     120.00 TL
                 </span>
                 <span>
                     80.00 TL
                 </span>
+                </div>
+
+                <StyledRated
+                    gap={2}
+                />
             </div>
 
             <div className="flex gap-[10px]">
