@@ -1,11 +1,12 @@
 'use client';
 
 import ClientOnly from "@/components/ClientOnly";
+import ReviewPage from "@/components/Pages/Reviews/ReviewPage";
 
 const Page = () => {
   return (
     <ClientOnly>
-    <div>Page</div>
+    <ReviewPage/>
     </ClientOnly>
   )
 }
