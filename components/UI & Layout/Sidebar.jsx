@@ -4,8 +4,11 @@ import data from '../sidebarData'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import gameData from '../oyunData'
+import useLogoutModal from '@/hooks/useLogout'
 
 const Sidebar = () => {
+
+  const logoutModal = useLogoutModal()
 
     const pathname = usePathname()
     const [currentData, setCurrentData] = useState()
@@ -38,6 +41,7 @@ const Sidebar = () => {
                 title={item.title}
                 color={item.color}
                 href={item.href}
+                onClick={() => logoutModal.onOpen()}
             />
             ))}
             </div>

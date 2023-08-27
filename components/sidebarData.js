@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import Dashboard from '@/public/icons/dashboard.svg';
 import Game from '@/public/icons/game.svg';
 import Cart from '@/public/icons/cart.svg';
@@ -5,6 +6,7 @@ import Users from '@/public/icons/user.svg';
 import Reviews from '@/public/icons/reviews.svg';
 import Orders from '@/public/icons/orders.svg';
 import Settings from '@/public/icons/settings.svg';
+import Logout from '@/public/icons/logout.svg';
 
 const data = [
     {
@@ -47,6 +49,12 @@ const data = [
       title: "Ayarlar",
       href: "/ayarlar",
       icon: <Settings />,
+      color: "#b6b6f8",
+    },
+    {
+      title: "Çıkış Yap",
+      href: null,
+      icon: <Logout />,
       color: "#b6b6f8",
     },
   ];

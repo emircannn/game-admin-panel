@@ -1,7 +1,8 @@
 'use client'
 
 
-import { usePathname, useRouter } from 'next/navigation';
+import axios from 'axios';
+import { usePathname } from 'next/navigation';
 import { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext({});
@@ -13,7 +14,21 @@ export function AuthContextProvider({ children }) {
 
   useEffect(() => {
     const token = sessionStorage.getItem('adminToken');
-    if (token) {setAuth(true)}
+    if (token) {
+        const verifyToken = async () => {
+            try {
+                const res = await axios.get(`${process.env.REQUEST}admin/verifyToken`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                setAuth(res.data.data)
+            } catch (error) {
+                setAuth(false);
+            }
+        };
+        verifyToken(); 
+    }
 
     if (!token) {setAuth(false)}
 

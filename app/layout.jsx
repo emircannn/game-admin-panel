@@ -11,6 +11,7 @@ import { Toaster } from 'react-hot-toast'
 import { AuthContextProvider } from '@/context/authContext'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import LogoutConfirmModal from '@/components/modals/LogoutModal'
 
 const font = Exo_2({ subsets: ['latin']})
 
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
       <Container>
       <Sidebar/>
       <DiscountModal/>
+      <LogoutConfirmModal/>
       <FirstBannerModal/>
       <SecBannerModal/>
       <AddCategoryModal/>

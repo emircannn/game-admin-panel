@@ -2,7 +2,12 @@
 
 import Button from "@/components/UI & Layout/Form/Button";
 import Input from "@/components/UI & Layout/Form/Input";
+import { AuthContext } from "@/context/authContext";
+import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import Slider from "react-slick";
 
 const LoginPage = () => {
@@ -17,6 +22,33 @@ const LoginPage = () => {
         autoplay: true,
         autoplaySpeed: 4000
       };
+
+      const [email, setEmail] = useState('')
+      const [password, setPassword] = useState('')
+      const [loading, setLoading] = useState(false)
+      const {setAuth} = useContext(AuthContext)
+      const {push} = useRouter()
+
+      const handleLogin = async() => {
+        setLoading(true)
+        try {
+            if(email && password) {
+                const res = await axios.post(`${process.env.REQUEST}admin/login`, {email, password})
+                toast.success(res.data.message, {position: 'bottom-right'})
+                sessionStorage.setItem('adminToken', res.data.token)
+                setLoading(false)
+                setAuth(true)
+                push('/')
+            }else {
+                toast.error('Gerekli alanları doldurun.', {position: 'bottom-right'})
+                setLoading(false)
+            }
+        } catch (error) {
+            toast.error(error?.response?.data?.message.split(':')[1], {position: 'bottom-right'})
+            setLoading(false)
+        }
+      };
+
   return (
     <div className="absolute top-0 left-0 w-screen h-screen bg-gradient-to-tl from-primary-dark via-primary to-primary-light flex items-center">
         {/* <div className="w-[30%] h-full shrink-0 flex items-center justify-center z-50">
@@ -59,9 +91,13 @@ const LoginPage = () => {
                 <div className="flex flex-col gap-[20px] py-[20px] w-full">
                     <Input
                         placeholder='Email'
+                        type='email'
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                     <Input
                         placeholder='Şifre'
+                        type='password'
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
 
@@ -69,6 +105,8 @@ const LoginPage = () => {
                     title='Giriş Yap'
                     wfull
                     mt="10"
+                    disabled={loading}
+                    onClick={() => handleLogin()}
                 />
             </div>
             </div>
