@@ -20,8 +20,6 @@ const Sidebar = () => {
     
     const currentPage = currentData?.find((item) => item.href === pathname)
 
-    console.log(pathname)
-
     if(pathname === '/oturum') {
       return null
     }

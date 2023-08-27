@@ -74,19 +74,19 @@ const LoginPage = () => {
             </div>
         <Slider {...settings}>
             <div className="w-full h-screen relative">
-            <Image alt="loading" src='/images/duel.png' fill quality={100} className="object-cover w-full h-full object-left"/>
+            <Image alt="loading" src='/images/duel.png' fill quality={100} priority className="object-cover w-full h-full object-left"/>
             </div>
             <div className="w-full h-screen relative">
-            <Image alt="loading" src='/images/gta.jpg' fill quality={100} className="object-cover w-full h-full object-left"/>
+            <Image alt="loading" src='/images/gta.jpg' fill quality={100} priority className="object-cover w-full h-full object-left"/>
             </div>
             <div className="w-full h-screen relative">
-            <Image alt="loading" src='/images/auth.png' fill quality={100} className="object-cover w-full h-full object-left"/>
+            <Image alt="loading" src='/images/auth.png' fill quality={100} priority className="object-cover w-full h-full object-left"/>
             </div>
             <div className="w-full h-screen relative">
-            <Image alt="loading" src='/images/deneme.jpg' fill quality={100} className="object-cover w-full h-full object-left"/>
+            <Image alt="loading" src='/images/deneme.jpg' fill quality={100} priority className="object-cover w-full h-full object-left"/>
             </div>
             <div className="w-full h-screen relative">
-            <Image alt="loading" src='/images/cod.jpg' fill quality={100} className="object-cover w-full h-full object-left"/>
+            <Image alt="loading" src='/images/cod.jpg' fill quality={100} priority className="object-cover w-full h-full object-left"/>
             </div>
         </Slider> 
         </div>

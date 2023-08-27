@@ -8,6 +8,7 @@ import FirstBannerModal from '@/components/modals/FirstBannerModal'
 import SecBannerModal from '@/components/modals/SecBannerModal'
 import AddCategoryModal from '@/components/modals/AddCategoryModal'
 import { Toaster } from 'react-hot-toast'
+import { AuthContextProvider } from '@/context/authContext'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -19,7 +20,9 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+
   return (
+    <AuthContextProvider>
     <html lang="tr">
       <body className={font.className}>
       <Header/>
@@ -36,5 +39,6 @@ export default function RootLayout({ children }) {
       </Container>
       </body>
     </html>
+    </AuthContextProvider>
   )
 }
