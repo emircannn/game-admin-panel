@@ -7,6 +7,9 @@ import DiscountModal from '@/components/modals/DiscountModal'
 import FirstBannerModal from '@/components/modals/FirstBannerModal'
 import SecBannerModal from '@/components/modals/SecBannerModal'
 import AddCategoryModal from '@/components/modals/AddCategoryModal'
+import { Toaster } from 'react-hot-toast'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const font = Exo_2({ subsets: ['latin']})
 
@@ -26,6 +29,7 @@ export default function RootLayout({ children }) {
       <FirstBannerModal/>
       <SecBannerModal/>
       <AddCategoryModal/>
+      <Toaster/>
       <div className='h-[calc(100vh_-_106px)] overflow-y-auto p-[20px] w-full'>
         {children}
       </div>

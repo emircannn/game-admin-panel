@@ -1,64 +1,59 @@
 'use client'
 
-import Button from "@/components/UI & Layout/Form/Button"
 import StyledRated from "@/components/UI & Layout/StyledRated"
+import { formatter } from "@/utils/helper";
 import Image from "next/image"
-import {BsFillEyeFill} from 'react-icons/bs'
+import { AiOutlineEye } from "react-icons/ai";
+import {BsFillTrash3Fill} from 'react-icons/bs'
 
-const Game = () => {
+const Game = ({
+    data
+}) => {
 
-    
+    const price = formatter.format(data?.price)
+    const discountPrice = data?.discountPrice ? formatter.format(data?.discountPrice) : null
   return (
-    <div className="w-full rounded-xl aspect-square bg-primary-lighter overflow-hidden duration-300 hover:neon-blue">
-        <div className="w-full h-[60%] relative overflow-hidden shrink-0 group">
-            <Image alt="" src='/images/fifa.jpg' priority fill quality={100} className="object-cover hover:scale-110 duration-300"/>
+    <div className="flex flex-col bg-primary-lighter rounded-xl overflow-hidden duration-300 hover:neon-blue">
+        <div className="w-full h-[100px] flex items-center gap-[20px] p-[12px]">
+            <div className="aspect-square h-full relative overflow-hidden shrink-0 group rounded-xl border-2 border-secondary">
+                <Image alt="" src={data?.coverImage} priority fill quality={100} className="object-cover hover:scale-110 duration-300"/>
+            </div>
 
-            <span className="absolute w-full h-full top-0 left-0 bg-black/50 flex cursor-pointer items-center justify-center flex-col 
-            gap-[10px] opacity-0 group-hover:opacity-100 duration-300">
-                <BsFillEyeFill className="text-white" size={28}/>
-                <span className="text-[14px] font-semibold text-white">
-                    Önizlemeyi Gör
-                </span>
+            <div className="w-full gap-[20px] grid grid-cols-7 text-[14px] font-semibold text-white">
+            <span className="flex items-center">{data?.name}</span>
+            <span className="text-center text-secondary flex items-center justify-center">
+                {data?.category?.name}
             </span>
-        </div>
+            <span className="text-center text-white flex items-center justify-center">
+                {data?.platform}
+            </span>
 
-        <div className="p-[10px] w-full h-[40%] flex flex-col gap-[10px] justify-between">
-            <div className="flex items-center justify-between text-[14px] text-white font-medium">
-                <h4 className=" font-semibold">
-                    Fifa 23
-                </h4>
-                <span className="text-secondary">
-                    Steam
-                </span>
-            </div>
-            <div className="flex items-center justify-between text-white text-[14px] font-medium">
-                <div className="flex items-center gap-[8px]">
-                <span className="line-through">
-                    120.00 TL
-                </span>
-                <span>
-                    80.00 TL
-                </span>
-                </div>
+            <span className="text-center text-secondary flex items-center justify-center flex-col">
+                <span className={`${data?.discountPrice && 'line-through'}`}>{price}</span>
+                {discountPrice && <span className="text-secondary-light">{discountPrice}</span>}
+            </span>
 
+            <span className="flex items-center justify-center gap-[6px]">
                 <StyledRated
-                    gap={2}
+                    size="16"
+                    value={data?.rating}
                 />
-            </div>
+                <span className="text-white font-semibold text-[13px]">({data?.reviews?.length})</span>
+            </span>
 
-            <div className="flex gap-[10px]">
-                <Button
-                    height="40px"
-                    wfull
-                    title='Düzenle'
-                />
-                <Button
-                    height="40px"
-                    wfull
-                    title='Sil'
-                    bgColor='#8585f5'
-                />
+            <span className="flex items-center justify-center text-secondary">
+                Stok: {data?.stok}
+            </span>
+
+            <div className="flex items-center justify-end gap-[10px] pr-[20px]">
+                <button className="w-[35px] aspect-square flex items-center justify-center bg-secondary rounded-xl hover:scale-105 duration-300">
+                    <AiOutlineEye size={18} className="text-white"/>
+                </button>
+                <button className="w-[35px] aspect-square flex items-center justify-center bg-graident-dark rounded-xl hover:scale-105 duration-300">
+                    <BsFillTrash3Fill size={18} className="text-white"/>
+                </button>
             </div>
+        </div>
         </div>
     </div>
   )

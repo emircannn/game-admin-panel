@@ -32,7 +32,13 @@ const nextConfig = {
       swcMinify: true,
       experimental :{ 
         appDir: true
-      }
+      },
+      env: {
+        REQUEST: process.env.REQUEST,
+      },
+      images: {
+        domains: ['localhost']
+      },
 }
 
 module.exports = nextConfig

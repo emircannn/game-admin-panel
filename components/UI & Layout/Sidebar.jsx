@@ -20,6 +20,12 @@ const Sidebar = () => {
     
     const currentPage = currentData?.find((item) => item.href === pathname)
 
+    console.log(pathname)
+
+    if(pathname === '/oturum') {
+      return null
+    }
+
   return (
     <div className='w-[240px] shrink-0 h-[calc(100vh_-_106px)] bg-primary-lighter px-[10px] py-[20px]'>
             <div className='mb-[30px] text-white text-xl font-medium flex items-center justify-center'>

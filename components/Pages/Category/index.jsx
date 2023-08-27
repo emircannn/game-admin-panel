@@ -5,73 +5,53 @@ import React, { useState, useEffect } from 'react';
 import GameSkeleton from "../Game/Skeleton";
 import CategoryBox from "./CategoryBox";
 import useAddCategory from "@/hooks/useAddCategory";
+import axios from "axios";
+import { toast } from "react-hot-toast";
+import Loading from "@/components/UI & Layout/Loading";
+import FilterSide from "./FilterSide";
 
 const CategoryPage = () => {
+    const [data, setData] = useState()
 
-    const {push} = useRouter()
-    const search = useSearchParams()
-
-    const categoryModal = useAddCategory()
-
-    const name = search.get('name')
-    const [searchInput, setSearchInput] = useState(name ? name : '')
-
-    useEffect(() => {
-        const updateURLQueryParams = () => {
-            const queryParams = [];
-            if (searchInput) {
-                queryParams.push(`name=${searchInput}`);
-            }
-            const newURL = `${window.location.pathname}?${queryParams.join('&')}`;
-            
-            if (searchInput) {
-                window.history.replaceState({}, '', newURL);
-                push(newURL)
-            }
-        };
-
-        updateURLQueryParams()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [ searchInput])
-
-    const clearFilter = () => {
-        const newURL = `${window.location.pathname}?`;
-        push(newURL)
-        setSearchInput('')
+  useEffect(() => {
+    const getData = async () => {
+        try {
+          const res = await axios.get(`${process.env.REQUEST}category/getAll`)
+          setData(res?.data?.data)
+        } catch (error) {
+          toast.error(error?.response?.data?.message.split(':')[1], {position: 'bottom-right'})
+        }
     }
+    getData()
+  }, [])
+
+  const handleDelete = (id) => {
+
+  }
+
+  if(!data) {
+    return <Loading/>
+  }
 
   return (
     <div className="flex flex-col gap-[30px]">
-        <div className="grid grid-cols-4 gap-[20px]">
-            <div className="col-span-2">
-                <Input height='55' placeholder='Arama...' value={searchInput} onChange={(e) => setSearchInput(e.target.value)}/>
-            </div>
+        <FilterSide/>
 
-            <div className="col-span-1">
-            <Button
-                wfull
-                title='Filtreyi Temizle'
-                onClick={() => clearFilter()}
-            />
-            </div>
-            <div className="col-span-1">
-            <Button
-                width='235px'
-                title='Kategori Ekle'
-                bgColor='#8585f5'
-                onClick={() => categoryModal.onOpen()}
-            />
-            </div>
-        </div>
-
+        {data.length > 0 ?
         <div className='grid grid-cols-3 gap-[20px] w-full'>
-            <CategoryBox/>
-            <CategoryBox/>
-            <CategoryBox/>
-            <CategoryBox/>
-            <CategoryBox/>
-            <GameSkeleton/>
+            {data?.map((item, i) => (
+                <CategoryBox
+                    key={i}
+                    data={item}
+                />
+            ))}
         </div>
+        :
+
+        <div className='flex items-center justify-center text-white text-[14px] font-semibold mt-[30px]'>
+            Henüz oyun eklemediniz...
+        </div>
+        }
     </div>
   )
 }

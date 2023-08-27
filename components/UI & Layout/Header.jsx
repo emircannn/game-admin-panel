@@ -1,8 +1,16 @@
 "use client"
 
 import Avatar from "./Avatar"
+import { usePathname } from "next/navigation"
 
 const Header = () => {
+
+    const {pathname} = usePathname()
+
+    if(pathname === '/oturum') {
+        return null
+    }
+    
   return (
     <header>
     
