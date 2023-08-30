@@ -1,6 +1,7 @@
 "use client";
 
 import { AuthContext } from "@/context/authContext";
+import { dateFormater } from "@/utils/helper";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 
@@ -18,9 +19,11 @@ export default function Home() {
         }
     }, [auth, pathname, push])
 
+    const date = dateFormater(Date.now())
+
   return (
-   <main>
-    xzcxzc
+   <main className="text-white text-[16px] font-semibold">
+    Hoşgeldiniz, {date}
    </main>
   )
 }

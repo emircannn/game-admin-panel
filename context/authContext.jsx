@@ -25,12 +25,13 @@ export function AuthContextProvider({ children }) {
                 setAuth(res.data.data)
             } catch (error) {
                 setAuth(false);
+                sessionStorage.removeItem('adminToken');
             }
         };
         verifyToken(); 
     }
 
-    if (!token) {setAuth(false)}
+    if (!token) {setAuth(false), sessionStorage.removeItem('adminToken');}
 
 }, [auth]);
 

@@ -21,7 +21,7 @@ const Header = () => {
 
         <div className="p-[10px] rounded-xl bg-primary-lighter flex items-center gap-5">
             <p className="text-white font-medium">
-                Emircan
+                Admin
             </p>
 
             <Avatar

@@ -13,10 +13,15 @@ const GamePage = () => {
   useEffect(() => {
     const getData = async () => {
         try {
-          const res = await axios.get(`${process.env.REQUEST}admin/allGames`)
+          const token = sessionStorage.getItem('adminToken');
+          const res = await axios.get(`${process.env.REQUEST}admin/allGames`,  {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
           setData(res?.data?.data)
         } catch (error) {
-          toast.error(error?.response?.data?.message.split(':')[1], {position: 'bottom-right'})
+          toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
         }
     }
     getData()

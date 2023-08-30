@@ -30,8 +30,8 @@ const LoginPage = () => {
       const {push} = useRouter()
 
       const handleLogin = async() => {
-        setLoading(true)
-        try {
+          try {
+            setLoading(true)
             if(email && password) {
                 const res = await axios.post(`${process.env.REQUEST}admin/login`, {email, password})
                 toast.success(res.data.message, {position: 'bottom-right'})
@@ -44,7 +44,7 @@ const LoginPage = () => {
                 setLoading(false)
             }
         } catch (error) {
-            toast.error(error?.response?.data?.message.split(':')[1], {position: 'bottom-right'})
+            toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
             setLoading(false)
         }
       };

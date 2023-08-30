@@ -43,7 +43,7 @@ dependencies:
     version: 13.4.13(eslint@8.47.0)(typescript@5.1.6)
   game-admin:
     specifier: 'file:'
-    version: file:(@babel/core@7.22.10)(@ckeditor/ckeditor5-core@39.0.1)(@ckeditor/ckeditor5-engine@39.0.1)(@ckeditor/ckeditor5-utils@39.0.1)(@ckeditor/ckeditor5-watchdog@39.0.1)(csstype@3.1.2)(typescript@5.1.6)
+    version: file:(@babel/core@7.22.10)(@ckeditor/ckeditor5-core@39.0.1)(@ckeditor/ckeditor5-engine@39.0.1)(@ckeditor/ckeditor5-utils@39.0.1)(@ckeditor/ckeditor5-watchdog@39.0.1)(csstype@3.1.2)(jquery@3.7.0)(typescript@5.1.6)
   moment:
     specifier: ^2.29.4
     version: 2.29.4
@@ -5221,7 +5221,7 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  file:(@babel/core@7.22.10)(@ckeditor/ckeditor5-core@39.0.1)(@ckeditor/ckeditor5-engine@39.0.1)(@ckeditor/ckeditor5-utils@39.0.1)(@ckeditor/ckeditor5-watchdog@39.0.1)(csstype@3.1.2)(typescript@5.1.6):
+  file:(@babel/core@7.22.10)(@ckeditor/ckeditor5-core@39.0.1)(@ckeditor/ckeditor5-engine@39.0.1)(@ckeditor/ckeditor5-utils@39.0.1)(@ckeditor/ckeditor5-watchdog@39.0.1)(csstype@3.1.2)(jquery@3.7.0)(typescript@5.1.6):
     resolution: {directory: '', type: directory}
     id: 'file:'
     name: game-admin
@@ -5248,6 +5248,7 @@ packages:
       react-icons: 4.10.1(react@18.2.0)
       react-outside-click-handler: 1.3.0(react-dom@18.2.0)(react@18.2.0)
       react-slick: 0.29.0(react-dom@18.2.0)(react@18.2.0)
+      slick-carousel: 1.8.1(jquery@3.7.0)
       tailwindcss: 3.3.3
       zustand: 4.4.1(react@18.2.0)
     transitivePeerDependencies:
@@ -5263,6 +5264,7 @@ packages:
       - debug
       - eslint-import-resolver-webpack
       - immer
+      - jquery
       - sass
       - supports-color
       - ts-node

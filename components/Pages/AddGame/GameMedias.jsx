@@ -7,9 +7,8 @@ import { BsUpload } from "react-icons/bs"
 import { IoMdPhotos } from "react-icons/io"
 
 const GameMedias = ({
-    setPhotos,
     setPhotosPre,
-    photosPre
+    photosPre,
 }) => {
 
   return (
@@ -21,10 +20,7 @@ const GameMedias = ({
         <div className="flex flex-col gap-[20px]">
             <div className="flex items-center gap-[20px]">
                 <div className="w-full">
-                <Input
-                    placeholder='Youtube Linki'
-                    width='100%'
-                />
+                
                 </div>
 
                 <button className="w-full h-[44px] rounded-xl overflow-hidden relative bg-primary-lighter flex items-center px-[10px] text-secondary justify-between">
@@ -34,7 +30,7 @@ const GameMedias = ({
                     <input 
                     type="file" 
                     multiple
-                    onChange={(e) => handleSelectImages(e,setPhotos, setPhotosPre)}
+                    onChange={(e) => handleSelectImages(e, setPhotosPre)}
                     className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer' />
                 </button>
             </div>

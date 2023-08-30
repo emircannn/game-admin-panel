@@ -1,8 +1,8 @@
 export const platformOptions = [
-    {label: 'Steam', value: 'steam'},
-    {label: 'EA', value: 'ea'},
-    {label: 'Ubisoft', value: 'ubisoft'},
-    {label: 'Epic Games', value: 'eg'},
+    {label: 'Steam', value: 'Steam'},
+    {label: 'EA', value: 'EA'},
+    {label: 'Ubisoft', value: 'Ubisoft'},
+    {label: 'Epic Games', value: 'Epic Games'},
 ]
 export const categoriesOptions = [
     {label: 'Strateji', value: '1'},

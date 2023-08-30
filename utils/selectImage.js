@@ -1,6 +1,7 @@
-export const handleSelectImage = (event,setPhoto,setPhotoPre) => {
+import { toast } from "react-hot-toast";
+
+export const handleSelectImage = (event,setPhotoPre) => {
     const selectedFile = event.target.files[0];
-    setPhoto(selectedFile);
 
     const reader = new FileReader();
     reader.onload = () => {
@@ -11,11 +12,11 @@ export const handleSelectImage = (event,setPhoto,setPhotoPre) => {
     }
   };
 
-  export const handleSelectImages = (event, setPhotos, setPhotoPreviews) => {
+  export const handleSelectImages = (event, setPhotoPreviews) => {
     const selectedFiles = event.target.files;
     const newPhotos = [];
     const newPhotoPreviews = [];
-  
+    if(selectedFiles.length <= 5) {
     for (let i = 0; i < Math.min(selectedFiles.length, 5); i++) {
       const file = selectedFiles[i];
       newPhotos.push(file);
@@ -33,7 +34,9 @@ export const handleSelectImage = (event,setPhoto,setPhotoPre) => {
         reader.readAsDataURL(file);
       }
     }
-  
-    setPhotos(newPhotos);
+    }
+    else {
+      toast.error('En fazla 5 tane fotoğraf seçebilirsiniz.', {position: 'bottom-right'});
+    }
   };
   

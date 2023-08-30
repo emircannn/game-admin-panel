@@ -16,10 +16,10 @@ const CategoryPage = () => {
   useEffect(() => {
     const getData = async () => {
         try {
-          const res = await axios.get(`${process.env.REQUEST}category/getAll`)
-          setData(res?.data?.data)
+            const res = await axios.get(`${process.env.REQUEST}category/getAll`)
+            setData(res?.data?.data)
         } catch (error) {
-          toast.error(error?.response?.data?.message.split(':')[1], {position: 'bottom-right'})
+            toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
         }
     }
     getData()

@@ -30,7 +30,7 @@ const SelectBanner = ({
                 </div>}
 
                 <input 
-                    onChange={(e) => handleSelectImage(e, setCoverImage, setCoverImagePre)}
+                    onChange={(e) => handleSelectImage(e, setCoverImagePre)}
                     type="file" 
                     className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer' />
             </div>
@@ -47,7 +47,7 @@ const SelectBanner = ({
                 </div>}
 
                 <input 
-                    onChange={(e) => handleSelectImage(e, setBannerImage, setBannerImagePre)}
+                    onChange={(e) => handleSelectImage(e, setBannerImagePre)}
                     type="file" 
                     className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer' />
             </div>
