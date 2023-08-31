@@ -1,42 +1,49 @@
 import { toast } from "react-hot-toast";
 
-export const handleSelectImage = (event,setPhotoPre) => {
-    const selectedFile = event.target.files[0];
+export const handleSelectImage = (event,setPhoto,setPhotoPre) => {
+  const selectedFile = event.target.files[0];
+  setPhoto(selectedFile);
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    setPhotoPre(reader.result);
+  };
+  if(selectedFile) {
+    reader.readAsDataURL(selectedFile);
+  }
+
+};
+export const handleSelectImages = (event, setPhotos, setPhotosPre) => {
+  const selectedFiles = event.target.files;
+
+  if (selectedFiles.length > 5) {
+    toast.error('En fazla 5 dosya seçebilirsiniz.', {position: 'bottom-right'});
+    event.target.value = null;
+    return;
+  }
+
+  const newPhotos = [];
+  const newPhotosPreviews = [];
+
+  for (let i = 0; i < selectedFiles.length; i++) {
+    const file = selectedFiles[i];
+    newPhotos.push(file);
 
     const reader = new FileReader();
     reader.onload = () => {
-      setPhotoPre(reader.result);
-    };
-    if(selectedFile) {
-      reader.readAsDataURL(selectedFile);
-    }
-  };
+      newPhotosPreviews.push(reader.result);
 
-  export const handleSelectImages = (event, setPhotoPreviews) => {
-    const selectedFiles = event.target.files;
-    const newPhotos = [];
-    const newPhotoPreviews = [];
-    if(selectedFiles.length <= 5) {
-    for (let i = 0; i < Math.min(selectedFiles.length, 5); i++) {
-      const file = selectedFiles[i];
-      newPhotos.push(file);
-  
-      const reader = new FileReader();
-      reader.onload = () => {
-        newPhotoPreviews.push(reader.result);
-  
-        if (newPhotoPreviews.length === newPhotos.length) {
-          setPhotoPreviews(newPhotoPreviews);
-        }
-      };
-  
-      if (file) {
-        reader.readAsDataURL(file);
+      if (newPhotosPreviews.length === selectedFiles.length) {
+        setPhotos(newPhotos);
+        setPhotosPre(newPhotosPreviews);
       }
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
     }
-    }
-    else {
-      toast.error('En fazla 5 tane fotoğraf seçebilirsiniz.', {position: 'bottom-right'});
-    }
-  };
-  
+  }
+};
+
+
+

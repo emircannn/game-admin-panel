@@ -61,6 +61,7 @@ const FirstStep = ({
             key: 'selection'
         }
     ]);
+    const [loading, setLoading] = useState(false)
 
     const handleSelect = (ranges) => {
         setPreOrderDate([ranges.selection]);
@@ -99,6 +100,7 @@ const FirstStep = ({
 
       const handleCreateGame = async() => {
         try {
+            setLoading(true)
             if(name && developer && releaseDate && stok && price && category && desc,platform && minimumSystemRequirements && recommendedSystemRequirements) {
                 const token = sessionStorage.getItem('adminToken');
             const res = await axios.post(`${process.env.REQUEST}game/create`,form, {
@@ -108,12 +110,15 @@ const FirstStep = ({
             })
             toast.success(res?.data?.message, {position: 'bottom-right'})
             setSeo(res?.data?.data?.seo)
+            setLoading(false)
             setModal(false)
             setStep(3)
             } else {
+                setLoading(false)
                 toast.error('Zorunlu Alanları Doldurun.', {position: 'bottom-right'})
             }
         } catch (error) {
+            setLoading(false)
             toast.error(error?.response?.data?.message.split(':')[1]|| error?.response?.data?.message, {position: 'bottom-right'})
         }
       };
@@ -179,6 +184,7 @@ const FirstStep = ({
         <CreateGameModal
             setModal={setModal}
             modal={modal}
+            disabled={loading}
             handleCreateGame={handleCreateGame}
           />
     </div>

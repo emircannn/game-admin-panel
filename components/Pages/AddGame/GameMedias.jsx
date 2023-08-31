@@ -9,6 +9,7 @@ import { IoMdPhotos } from "react-icons/io"
 const GameMedias = ({
     setPhotosPre,
     photosPre,
+    setPhotos
 }) => {
 
   return (
@@ -30,7 +31,7 @@ const GameMedias = ({
                     <input 
                     type="file" 
                     multiple
-                    onChange={(e) => handleSelectImages(e, setPhotosPre)}
+                    onChange={(e) => handleSelectImages(e,setPhotos, setPhotosPre)}
                     className='absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer' />
                 </button>
             </div>

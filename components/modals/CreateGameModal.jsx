@@ -6,7 +6,8 @@ import Modal from "./Modal"
 const CreateGameModal = ({
     modal, 
     setModal,
-    handleCreateGame
+    handleCreateGame,
+    disabled
 }) => {
     const body = (
         <div className="w-auto text-white font-semibold">
@@ -23,6 +24,7 @@ const CreateGameModal = ({
         secondaryAction={() => setModal(false)}
         secondaryActionLabel='İptal Et'
         body={body}
+        disabled={disabled}
         width='auto'
     />
   )

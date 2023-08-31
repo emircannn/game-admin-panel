@@ -14,22 +14,29 @@ import { useRouter } from "next/navigation";
 const AddGame = () => {
 
   const [coverImagePre, setCoverImagePre] = useState()
+  const [coverImage, setCoverImage] = useState()
   const [bannerImagePre, setBannerImagePre] = useState()
+  const [bannerImage, setBannerImage] = useState()
   const [photosPre, setPhotosPre] = useState()
+  const [photos, setPhotos] = useState()
   const [youtubeLink, setYoutubeLink] = useState()
 
-  const [step, setStep] = useState(3)
+  const [step, setStep] = useState(0)
   const [modal, setModal] = useState(false)
-  const [seo, setSeo] = useState('fifa_23')
+  const [loading, setLoading] = useState(false)
+  const [seo, setSeo] = useState()
 
   const {push} = useRouter()
 
   const handleUploadImage = async() => {
     try {
+        setLoading(true)
         const formData = new FormData();
-        formData.append('coverImage', coverImagePre)
-        formData.append('bannerImage', bannerImagePre)
-        formData.append('images', photosPre)
+        formData.append('coverImage', coverImage)
+        formData.append('bannerImage', bannerImage)
+        for (let i = 0; i < photos?.length; i++) {
+          formData.append('gameImages', photos[i]);
+        }
         const token = sessionStorage.getItem('adminToken');
         const res = await axios.post(`${process.env.REQUEST}game/uploadImage?seo=${seo}`,formData, {
           headers: {
@@ -37,12 +44,13 @@ const AddGame = () => {
             'Content-Type': 'multipart/form-data'
           }
         })
-        console.log(formData)
+        setSeo()
         toast.success(res?.data?.message, {position: 'bottom-right'})
-      
-        /* push('/oyunlar') */
+        setLoading(false)
+        push('/oyunlar')
     } catch (error) {
-        toast.error(error?.response?.data?.message.split(':')[1]|| error?.response?.data?.message, {position: 'bottom-right'})
+      setLoading(false)
+        toast.error(error?.response?.data?.message?.split(':')[1]|| error?.response?.data?.message, {position: 'bottom-right'})
     }
   };
 
@@ -56,12 +64,15 @@ const AddGame = () => {
       <SelectBanner
         setBannerImagePre={setBannerImagePre}
         setCoverImagePre={setCoverImagePre}
+        setBannerImage={setBannerImage}
+        setCoverImage={setCoverImage}
         bannerImagePre={bannerImagePre}
         coverImagePre={coverImagePre}
       />
       <GameMedias
         photosPre={photosPre}
         setPhotosPre={setPhotosPre}
+        setPhotos={setPhotos}
         setYoutubeLink={setYoutubeLink}
         youtubeLink={youtubeLink}
       />
@@ -84,6 +95,7 @@ const AddGame = () => {
         <Button
           mt="0"
           title='Resimleri Yükle'
+          disabled={loading}
           onClick={() => handleUploadImage()}
         />}
       </div>

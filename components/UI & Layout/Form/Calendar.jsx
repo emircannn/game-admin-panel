@@ -8,13 +8,15 @@ import 'react-date-range/dist/theme/default.css';
 const Calendar = ({
     value,
     onChange,
-    disabledDates
+    disabledDates,
+    preOrder= false
 }) => {
 
   
 
   return (
-    <DateRange
+    <>
+      {preOrder ?<DateRange
       rangeColors={['#8585f5']}
       ranges={value}
       date={new Date()}
@@ -25,6 +27,19 @@ const Calendar = ({
       locale={tr}
       disabledDates={[disabledDates]}
     />
+    :
+    <DateRange
+      rangeColors={['#8585f5']}
+      ranges={value}
+      date={new Date()}
+      onChange={onChange}
+      direction="vertical"
+      showDateDisplay={false}
+      locale={tr}
+      disabledDates={[disabledDates]}
+    />
+    }
+    </>
   )
 }
 

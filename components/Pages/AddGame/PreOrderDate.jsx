@@ -163,6 +163,7 @@ const PreOrderDate = ({
                 <Calendar
                     onChange={handleSelect}
                     value={selectedRange}
+                    preOrder
                 />
                 </div>
                 <div className="flex flex-col gap-[10px] w-full">
