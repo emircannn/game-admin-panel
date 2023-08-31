@@ -23,7 +23,8 @@ const Info = ({
     stok,
     price,
     setDiscountRate,
-    discountRate
+    discountRate,
+    data
 }) => {
 
     const [categoryData, setCategoryData] = useState([])
@@ -58,7 +59,7 @@ const Info = ({
 
                 <Input
                     wfull
-                    placeholder='Fifa 23'
+                    placeholder={data?.name}
                     onChange={(e) => setName(e.target.value)}
                     value={name}
                 />
@@ -68,7 +69,7 @@ const Info = ({
 
                 <Input
                     wfull
-                    placeholder='EA Sports'
+                    placeholder={data?.developer}
                     onChange={(e) => setDeveloper(e.target.value)}
                     value={developer}
                 />
@@ -77,7 +78,7 @@ const Info = ({
                 Youtube Linki
 
                 <Input
-                    placeholder='https://www.youtube.com/watch?v=XhP3Xh4LMA8'
+                    placeholder={data?.youtubeLink}
                     width='100%'
                     onChange={(e) => setYoutubeLink(e.target.value)}
                     value={youtubeLink}
@@ -89,7 +90,7 @@ const Info = ({
 
                 <Input
                     wfull
-                    placeholder='100'
+                    placeholder={data?.stok}
                     type='number'
                     textCenter
                     onChange={(e) => setStok(e.target.value)}
@@ -101,7 +102,7 @@ const Info = ({
 
                 <Input
                     wfull
-                    placeholder='250 TL'
+                    placeholder={data?.price}
                     type='number'
                     textCenter
                     onChange={(e) => setPrice(e.target.value)}
@@ -113,7 +114,7 @@ const Info = ({
 
                 <Input
                     wfull
-                    placeholder='20%'
+                    placeholder={data?.discountRate ? data?.discountRate : '20%'}
                     type='number'
                     textCenter
                     onChange={(e) => setDiscountRate(e.target.value)}

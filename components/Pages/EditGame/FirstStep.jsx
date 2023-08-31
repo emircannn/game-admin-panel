@@ -18,47 +18,48 @@ const FirstStep = ({
     setStep,
     setModal,
     modal,
-    setSeo
+    setSeo,
+    data
 }) => {
     const [name, setName] = useState()
     const [developer, setDeveloper] = useState()
     const [youtubeLink, setYoutubeLink] = useState()
     const [stok, setStok] = useState()
     const [price, setPrice] = useState()
-    const [category, setCategory] = useState()
-    const [platform, setPlatform] = useState()
-    const [desc, setDesc] = useState()
-    const [similarGames, setSimilarGames] = useState([])
+    const [category, setCategory] = useState(data?.category)
+    const [platform, setPlatform] = useState(data?.platform)
+    const [desc, setDesc] = useState(data?.desc)
+    const [similarGames, setSimilarGames] = useState(data?.similarGames)
     const [discountRate, setDiscountRate] = useState()
     const [minimumSystemRequirements, setMinimumSystemRequirements] = useState({
-        operatingSystem: '',
-        processor: '',
-        memory: '',
-        graphicsCard: '',
-        network: '',
-        disk: ''
+        operatingSystem: undefined,
+        processor: undefined,
+        memory: undefined,
+        graphicsCard: undefined,
+        network: undefined,
+        disk: undefined
     })
     const [recommendedSystemRequirements, setRecommendedSystemRequirements] = useState({
-        operatingSystem: '',
-        processor: '',
-        memory: '',
-        graphicsCard: '',
-        network: '',
-        disk: ''
+        operatingSystem: undefined,
+        processor: undefined,
+        memory: undefined,
+        graphicsCard: undefined,
+        network: undefined,
+        disk: undefined
     })
 
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(data?.preOrderDate ? true : false);
     const [preOrderDate, setPreOrderDate] = useState([
         {
             startDate: new Date(),
-            endDate: new Date(),
+            endDate: undefined,
             key: 'selection'
         }
     ]);
     const [releaseDate, setReleaseDate] = useState([
         {
             startDate: new Date(),
-            endDate: new Date(),
+            endDate: undefined,
             key: 'selection'
         }
     ]);
@@ -103,9 +104,8 @@ const FirstStep = ({
       const handleCreateGame = async() => {
         try {
             setLoading(true)
-            if(name && developer && releaseDate && stok && price && category && desc,platform && minimumSystemRequirements && recommendedSystemRequirements) {
                 const token = sessionStorage.getItem('adminToken');
-            const res = await axios.post(`${process.env.REQUEST}game/create`,form, {
+            const res = await axios.post(`${process.env.REQUEST}game/update?seoName=${data?.seo}`,form, {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
@@ -115,10 +115,6 @@ const FirstStep = ({
             setLoading(false)
             setModal(false)
             setStep(3)
-            } else {
-                setLoading(false)
-                toast.error('Zorunlu Alanları Doldurun.', {position: 'bottom-right'})
-            }
         } catch (error) {
             setLoading(false)
             toast.error(error?.response?.data?.message.split(':')[1]|| error?.response?.data?.message, {position: 'bottom-right'})
@@ -144,6 +140,7 @@ const FirstStep = ({
             youtubeLink={youtubeLink}
             setDiscountRate={setDiscountRate}
             discountRate={discountRate}
+            data={data}
         />
         <Editor
             setData={setDesc}
@@ -162,6 +159,7 @@ const FirstStep = ({
             recommendedSystemRequirements={recommendedSystemRequirements}
             handleReleaseDate={handleReleaseDate}
             releaseDate={releaseDate}
+            data={data}
         />}
 
         {step === 2 && <SimilarsGame
@@ -179,8 +177,14 @@ const FirstStep = ({
 
         <Button
           mt="0"
-          title='Oluştur'
+          title='Güncelle'
           onClick={() => setModal(true)}
+        />
+
+        <Button
+          mt="0"
+          title='Sadece Resimleri Güncelle'
+          onClick={() => setStep(3)}
         />
         </div>}
 
@@ -189,6 +193,7 @@ const FirstStep = ({
             modal={modal}
             disabled={loading}
             handleCreateGame={handleCreateGame}
+            update
           />
     </div>
   )

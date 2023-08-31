@@ -3,7 +3,8 @@
 import StyledRated from "@/components/UI & Layout/StyledRated"
 import { formatter } from "@/utils/helper";
 import Image from "next/image"
-import { AiOutlineEye } from "react-icons/ai";
+import Link from "next/link";
+import { AiFillEdit } from "react-icons/ai";
 import {BsFillTrash3Fill} from 'react-icons/bs'
 
 const Game = ({
@@ -46,9 +47,11 @@ const Game = ({
             </span>
 
             <div className="flex items-center justify-end gap-[10px] pr-[20px]">
+                <Link href={`/oyunlar/duzenle/${data?.seo}`}>
                 <button className="w-[35px] aspect-square flex items-center justify-center bg-secondary rounded-xl hover:scale-105 duration-300">
-                    <AiOutlineEye size={18} className="text-white"/>
+                    <AiFillEdit size={18} className="text-white"/>
                 </button>
+                </Link>
                 <button className="w-[35px] aspect-square flex items-center justify-center bg-graident-dark rounded-xl hover:scale-105 duration-300">
                     <BsFillTrash3Fill size={18} className="text-white"/>
                 </button>

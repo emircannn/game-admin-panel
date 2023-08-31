@@ -7,19 +7,22 @@ const CreateGameModal = ({
     modal, 
     setModal,
     handleCreateGame,
-    disabled
+    disabled,
+    update=false
 }) => {
     const body = (
         <div className="w-auto text-white font-semibold">
-            Oyun oluşturmak üzeresiniz, oluşturduktan sonra oyunla ilgili resimleri yüklemeyi unutmayınız.
+            {update ? 'Oyun güncellemek üzeresiniz, gencelledikten sonra oyunla ilgili resimleri güncelleyebilirsiniz.' 
+            :
+            'Oyun oluşturmak üzeresiniz, oluşturduktan sonra oyunla ilgili resimleri yüklemeyi unutmayınız.'}
         </div>
     )
   return (
     <Modal
         isOpen={modal}
         onClose={() => setModal(false)}
-        title='Oyun oluştur'
-        actionLabel='Oluştur'
+        title={update ? 'Oyunu Güncelle' : 'Oyun oluştur'}
+        actionLabel={update ? 'Güncelle' : 'Oluştur'}
         onSubmit={() => handleCreateGame()}
         secondaryAction={() => setModal(false)}
         secondaryActionLabel='İptal Et'
