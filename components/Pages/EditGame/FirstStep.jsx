@@ -9,7 +9,7 @@ import PreOrderDate from "./PreOrderDate";
 import CreateGameModal from "@/components/modals/CreateGameModal";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-const Editor = dynamic(() => import('./Editor'), { 
+const Editor = dynamic(() => import('../AddGame/Editor'), { 
     ssr: false 
   });
   
@@ -23,7 +23,7 @@ const FirstStep = ({
 }) => {
     const [name, setName] = useState()
     const [developer, setDeveloper] = useState()
-    const [youtubeLink, setYoutubeLink] = useState()
+    const [youtubeLink, setYoutubeLink] = useState(data?.youtubeLink)
     const [stok, setStok] = useState()
     const [price, setPrice] = useState()
     const [category, setCategory] = useState(data?.category)
@@ -32,20 +32,20 @@ const FirstStep = ({
     const [similarGames, setSimilarGames] = useState(data?.similarGames)
     const [discountRate, setDiscountRate] = useState()
     const [minimumSystemRequirements, setMinimumSystemRequirements] = useState({
-        operatingSystem: undefined,
-        processor: undefined,
-        memory: undefined,
-        graphicsCard: undefined,
-        network: undefined,
-        disk: undefined
+        operatingSystem: data?.minimumSystemRequirements?.operatingSystem,
+        processor: data?.minimumSystemRequirements?.processor,
+        memory: data?.minimumSystemRequirements?.memory,
+        graphicsCard: data?.minimumSystemRequirements?.graphicsCard,
+        network: data?.minimumSystemRequirements?.network,
+        disk: data?.minimumSystemRequirements?.disk
     })
     const [recommendedSystemRequirements, setRecommendedSystemRequirements] = useState({
-        operatingSystem: undefined,
-        processor: undefined,
-        memory: undefined,
-        graphicsCard: undefined,
-        network: undefined,
-        disk: undefined
+        operatingSystem: data?.recommendedSystemRequirements?.operatingSystem,
+        processor: data?.recommendedSystemRequirements?.processor,
+        memory: data?.recommendedSystemRequirements?.memory,
+        graphicsCard: data?.recommendedSystemRequirements?.graphicsCard,
+        network: data?.recommendedSystemRequirements?.network,
+        disk: data?.recommendedSystemRequirements?.disk
     })
 
     const [isChecked, setIsChecked] = useState(data?.preOrderDate ? true : false);

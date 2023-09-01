@@ -168,7 +168,7 @@ const PreOrderDate = ({
                 />
                 </div>
                 <div className="flex flex-col gap-[10px] w-full">
-                    <span className="text-white text-[14px]">Çıkış Tarihi *Çıkış Tarihi Zorunludur.*</span>
+                    <span className="text-white text-[14px]">Çıkış Tarihi</span>
                 <Calendar
                     onChange={handleReleaseDate}
                     value={releaseDate}

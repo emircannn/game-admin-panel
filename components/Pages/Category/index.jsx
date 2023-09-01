@@ -1,32 +1,29 @@
-import Button from "@/components/UI & Layout/Form/Button";
-import Input from "@/components/UI & Layout/Form/Input"
-import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState, useEffect } from 'react';
-import GameSkeleton from "../Game/Skeleton";
 import CategoryBox from "./CategoryBox";
-import useAddCategory from "@/hooks/useAddCategory";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import Loading from "@/components/UI & Layout/Loading";
 import FilterSide from "./FilterSide";
+import EditCategoryModal from "@/components/modals/EditCategoryModal";
+import { getCategory } from '@/utils/Requests';
+import DeleteCategoryModal from '@/components/modals/DeleteCategoryModal';
 
 const CategoryPage = () => {
     const [data, setData] = useState()
+    const [categoryModal, setCategoryModal] = useState(false) 
+    const [deleteModal, setDeleteModal] = useState(false) 
+    const [currentCategory, setCurrentCategory] = useState()
 
   useEffect(() => {
-    const getData = async () => {
-        try {
-            const res = await axios.get(`${process.env.REQUEST}category/getAll`)
-            setData(res?.data?.data)
-        } catch (error) {
-            toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
-        }
-    }
-    getData()
+    getCategory(setData)
   }, [])
 
-  const handleDelete = (id) => {
+  const handleUpdateCategory =(data) => {
+    setCurrentCategory(data)
+    setCategoryModal(true)
+  }
 
+  const handleDelete = async (data) => {
+    setCurrentCategory(data)
+    setDeleteModal(true)
   }
 
   if(!data) {
@@ -35,7 +32,9 @@ const CategoryPage = () => {
 
   return (
     <div className="flex flex-col gap-[30px]">
-        <FilterSide/>
+        <FilterSide
+            setData={setData}
+        />
 
         {data.length > 0 ?
         <div className='grid grid-cols-3 gap-[20px] w-full'>
@@ -43,15 +42,33 @@ const CategoryPage = () => {
                 <CategoryBox
                     key={i}
                     data={item}
+                    onUpdate={() => handleUpdateCategory(item)}
+                    onDelete={() => handleDelete(item)}
                 />
             ))}
         </div>
         :
 
         <div className='flex items-center justify-center text-white text-[14px] font-semibold mt-[30px]'>
-            Henüz oyun eklemediniz...
+            Henüz kategori eklemediniz...
         </div>
         }
+
+        <EditCategoryModal
+            setCategoryModal={setCategoryModal}
+            categoryModal={categoryModal}
+            data={currentCategory}
+            setData={setCurrentCategory}
+            setAllCategories={setData}
+        />
+
+        <DeleteCategoryModal
+        deleteModal={deleteModal}
+        setDeleteModal={setDeleteModal}
+        data={currentCategory}
+        setData={setCurrentCategory}
+        setAllCategories={setData}
+        />
     </div>
   )
 }

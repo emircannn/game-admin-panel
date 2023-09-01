@@ -6,6 +6,7 @@ import { platformOptions } from "../Game/filter"
 import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 import axios from "axios"
+import YoutubeInfo from "../AddGame/YoutubeInfo"
 
 const Info = ({
     setName,
@@ -75,7 +76,10 @@ const Info = ({
                 />
             </label>
                 <label className="flex flex-col gap-[8px] text-[14px] font-semibold text-white">
+                <span className="flex items-center gap-[6px]">
                 Youtube Linki
+                <YoutubeInfo/>
+                </span>
 
                 <Input
                     placeholder={data?.youtubeLink}

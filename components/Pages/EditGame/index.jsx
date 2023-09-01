@@ -42,7 +42,6 @@ const EditGame = () => {
   const [bannerImage, setBannerImage] = useState()
   const [photosPre, setPhotosPre] = useState()
   const [photos, setPhotos] = useState()
-  const [youtubeLink, setYoutubeLink] = useState()
 
   const [step, setStep] = useState(0)
   const [modal, setModal] = useState(false)
@@ -55,6 +54,7 @@ const EditGame = () => {
     setSeo(data?.seo)
     setCoverImagePre(data?.coverImage)
     setBannerImagePre(data?.bannerImage)
+    setPhotosPre(data?.images)
     setPhotosPre(data?.images)
   }, [data])
 
@@ -107,8 +107,6 @@ const EditGame = () => {
         photosPre={photosPre}
         setPhotosPre={setPhotosPre}
         setPhotos={setPhotos}
-        setYoutubeLink={setYoutubeLink}
-        youtubeLink={youtubeLink}
       />
       </>}
 

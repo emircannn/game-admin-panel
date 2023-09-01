@@ -2,11 +2,14 @@
 
 import Button from "@/components/UI & Layout/Form/Button"
 import Input from "@/components/UI & Layout/Form/Input"
+import AddCategoryModal from "@/components/modals/AddCategoryModal"
 import useAddCategory from "@/hooks/useAddCategory"
 import { useSearchParams, useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
 
-const FilterSide = () => {
+const FilterSide = ({
+    setData
+}) => {
     const {push} = useRouter()
     const search = useSearchParams()
 
@@ -60,6 +63,9 @@ const FilterSide = () => {
                 onClick={() => categoryModal.onOpen()}
             />
             </div>
+            <AddCategoryModal
+                setData={setData}
+            />
         </div>
   )
 }

@@ -3,7 +3,6 @@
 import Modal from './Modal'
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
-import useAddCategory from '@/hooks/useAddCategory';
 import {IoMdPhotos} from 'react-icons/io'
 import { BsUpload } from 'react-icons/bs';
 import { handleSelectImage } from '@/utils/selectImage';
@@ -12,52 +11,77 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import { getCategory } from '@/utils/Requests';
 
-const AddCategoryModal = ({
-    setData
+const EditCategoryModal = ({
+    categoryModal,
+    setCategoryModal,
+    data,
+    setData,
+    setAllCategories
 }) => {
-
-    const categoryModal = useAddCategory()
+    
     const [banner, setBanner] = useState()
     const [bannerPre, setBannerPre] = useState()
     const [character, setCharacter] = useState()
     const [characterPre, setCharacterPre] = useState()
     const [name, setName] = useState()
     const [loading, setLoading] = useState(false)
-
-    const handleCreate= async () => {
+    
+    const handleUpdate= async () => {
         try {
-            if(name && character && banner) {
-                const token = sessionStorage.getItem('adminToken');
+            if(name) {
+            const token = sessionStorage.getItem('adminToken');
             const formData = new FormData();
             formData.append('banner', banner)
             formData.append('character', character)
-            formData.append('name', name)
-            const res = await axios.post(`${process.env.REQUEST}category/create`, formData, {
+            const res = await axios.post(`${process.env.REQUEST}category/update?id=${data?._id}&name=${name}`, formData, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
                 })
             toast.success(res?.data?.message, {position: "bottom-right"})
             setLoading(false)
-            categoryModal.onClose()
-            getCategory(setData)
+            setCategoryModal(false)
+            setData()
+            getCategory(setAllCategories)
+            setName()
             } else {
-                toast.error('Tüm alanlar zorunludur.', {position: 'bottom-right'})
-            }
-        } catch (error) {
+            const token = sessionStorage.getItem('adminToken');
+            const formData = new FormData();
+            formData.append('banner', banner)
+            formData.append('character', character)
+            const res = await axios.post(`${process.env.REQUEST}category/update?id=${data?._id}`, formData, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+                })
+            toast.success(res?.data?.message, {position: "bottom-right"})
             setLoading(false)
-            toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
+            setCategoryModal(false)
+            setData()
+            getCategory(setAllCategories)
+            setName()
         }
+    } catch (error) {
+        setLoading(false)
+        toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
     }
+}
+
+    useEffect(() => {
+        setBannerPre(data?.banner)
+        setCharacterPre(data?.character)
+    }, [data])
+    
 
     const body = (
     <div className='flex gap-[20px] w-[400px] flex-col'>
         <div className='w-full h-[200px] rounded-xl relative overflow-hidden border-2 border-secondary flex items-center justify-center cursor-pointer'>
-            {!character && !banner ? <IoMdPhotos size={40} className='text-secondary'/> : null}
+            {!bannerPre && !characterPre ? <IoMdPhotos size={40} className='text-secondary'/> : null}
 
-            {banner && <Image alt='char' src={bannerPre} fill quality={100} className='object-cover'/>}
+            {bannerPre && <Image alt='char' src={bannerPre} fill quality={100} className='object-cover'/>}
 
-            {character && <span className='absolute w-[35%] h-full top-0 right-0 z-50'>
+            {characterPre && 
+            <span className='absolute w-[35%] h-full top-0 right-0 z-50'>
                 <Image alt='char' src={characterPre} fill quality={100} className='object-contain object-bottom'/>
             </span>}
         </div>
@@ -91,11 +115,11 @@ const AddCategoryModal = ({
 
   return (
     <Modal
-        isOpen={categoryModal.isOpen}
-        onClose={categoryModal.onClose}
-        title='Kategori Ekle'
+        isOpen={categoryModal}
+        onClose={() => setCategoryModal(false)}
+        title='Kategori Düzenle'
         actionLabel='Kategori Oluştur'
-        onSubmit={() => handleCreate()}
+        onSubmit={() => handleUpdate()}
         body={body}
         width='auto'
         disabled={loading}
@@ -103,4 +127,4 @@ const AddCategoryModal = ({
   )
 }
 
-export default AddCategoryModal
+export default EditCategoryModal

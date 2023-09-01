@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import FilterSide from "../Game/FilterSide";
-import axios from "axios";
-import { toast } from "react-hot-toast";
 import { useEffect, useState } from "react";
+import { getGames } from "@/utils/Requests";
 
 const SimilarsGame = ({
     handleSimilarGames,
@@ -14,20 +13,7 @@ const SimilarsGame = ({
     const [gameData, setGameData] = useState([])
 
     useEffect(() => {
-      const getData = async () => {
-        try {
-            const token = sessionStorage.getItem('adminToken');
-            const res = await axios.get(`${process.env.REQUEST}admin/allGames`, {
-                headers: {
-                    Authorization: 'Bearer ' + token
-                }
-            })
-            setGameData(res?.data?.data)
-        } catch (error) {
-            toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
-        }
-      }
-      getData();
+        getGames(setGameData);
     }, [])
 
     const Game = ({

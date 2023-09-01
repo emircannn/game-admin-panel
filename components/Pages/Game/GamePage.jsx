@@ -5,10 +5,13 @@ import Game from './Game';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import Loading from '@/components/UI & Layout/Loading';
+import ConfirmDeleteModal from '@/components/modals/ConfirmDeleteModal';
 
 const GamePage = () => {
 
   const [data, setData] = useState()
+  const [isOpen, setIsOpen] = useState(false)
+  const [selectedGame, setSelectedGame] = useState()
 
   useEffect(() => {
     const getData = async () => {
@@ -27,6 +30,11 @@ const GamePage = () => {
     getData()
   }, [])
 
+  const handleDeleteModal = (data) => {
+    setIsOpen(true)
+    setSelectedGame(data)
+  }
+
   if(!data) {
     return <Loading/>
   }
@@ -38,7 +46,11 @@ const GamePage = () => {
       <div className='flex flex-col gap-[20px] w-full'>
         {data?.length > 0 ?
           data.map((item, i) => (
-            <Game key={i} data={item}/>
+            <Game 
+            key={i} 
+            data={item}
+            onDelete={() => handleDeleteModal(item)}
+            />
           ))
           :
           <div className='flex items-center justify-center text-white text-[14px] font-semibold mt-[30px]'>
@@ -46,6 +58,13 @@ const GamePage = () => {
           </div>
           }
       </div>
+
+      <ConfirmDeleteModal
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        setSelectedGame={setSelectedGame}
+        selectedGame={selectedGame}
+      />
     </div>
   )
 }

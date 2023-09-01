@@ -8,7 +8,8 @@ import { AiFillEdit } from "react-icons/ai";
 import {BsFillTrash3Fill} from 'react-icons/bs'
 
 const Game = ({
-    data
+    data,
+    onDelete
 }) => {
 
     const price = formatter.format(data?.price)
@@ -52,7 +53,9 @@ const Game = ({
                     <AiFillEdit size={18} className="text-white"/>
                 </button>
                 </Link>
-                <button className="w-[35px] aspect-square flex items-center justify-center bg-graident-dark rounded-xl hover:scale-105 duration-300">
+                <button
+                onClick={onDelete}
+                className="w-[35px] aspect-square flex items-center justify-center bg-graident-dark rounded-xl hover:scale-105 duration-300">
                     <BsFillTrash3Fill size={18} className="text-white"/>
                 </button>
             </div>

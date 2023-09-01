@@ -2,7 +2,9 @@ import Button from "@/components/UI & Layout/Form/Button"
 import Image from "next/image"
 
 const CategoryBox = ({
-    data
+    data,
+    onUpdate,
+    onDelete
 }) => {
   return (
     <div className="w-full rounded-xl aspect-square bg-primary-lighter overflow-hidden duration-300 hover:neon-blue">
@@ -27,12 +29,14 @@ const CategoryBox = ({
                     height="40px"
                     wfull
                     title='Düzenle'
+                    onClick={onUpdate}
                 />
                 <Button
                     height="40px"
                     wfull
                     title='Sil'
                     bgColor='#8585f5'
+                    onClick={onDelete}
                 />
             </div>
         </div>

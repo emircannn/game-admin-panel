@@ -6,7 +6,6 @@ import Sidebar from '@/components/UI & Layout/Sidebar'
 import DiscountModal from '@/components/modals/DiscountModal'
 import FirstBannerModal from '@/components/modals/FirstBannerModal'
 import SecBannerModal from '@/components/modals/SecBannerModal'
-import AddCategoryModal from '@/components/modals/AddCategoryModal'
 import { Toaster } from 'react-hot-toast'
 import { AuthContextProvider } from '@/context/authContext'
 import "slick-carousel/slick/slick.css";
@@ -29,11 +28,9 @@ export default function RootLayout({ children }) {
       <Header/>
       <Container>
       <Sidebar/>
-      <DiscountModal/>
       <LogoutConfirmModal/>
       <FirstBannerModal/>
       <SecBannerModal/>
-      <AddCategoryModal/>
       <Toaster/>
       <div className='h-[calc(100vh_-_106px)] overflow-y-auto p-[20px] w-full'>
         {children}
