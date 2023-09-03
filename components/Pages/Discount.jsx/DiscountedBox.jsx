@@ -8,7 +8,8 @@ import { toast } from "react-hot-toast"
 
 const DiscountedBox = ({
     data,
-    setData
+    setData,
+    setTotalPages
 }) => {
 
     const discountDateDB = data?.discountDate ? data?.discountDate : null;
@@ -39,7 +40,7 @@ const DiscountedBox = ({
         })
         toast.success(res?.data?.message, {position: 'bottom-right'})
         setLoading(false)
-        getDiscountedGames(setData)
+        getDiscountedGames(setData, setTotalPages)
         } catch (error) {
             setLoading(false)
             toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})

@@ -6,17 +6,19 @@ import DiscountModal from "@/components/modals/DiscountModal";
 import { useEffect, useState } from "react";
 import { getDiscountedGames } from "@/utils/Requests";
 import Loading from "@/components/UI & Layout/Loading";
+import Pagination from "@/components/UI & Layout/Pagination";
 
 
 const DiscountPage = () => {
 
     const discountModal = useDiscountModal()
-
     const [data, setData] = useState()
+    const [page, setPage] = useState(1)
+    const [totalPages, setTotalPages] = useState()
 
     useEffect(() => {
-        getDiscountedGames(setData);
-    }, [])
+        getDiscountedGames(setData,setTotalPages, page);
+    }, [page])
 
     if(!data) {
         return <Loading/>
@@ -44,13 +46,19 @@ const DiscountPage = () => {
                     key={i}
                     data={item}
                     setData={setData}
+                    setTotalPages={setTotalPages}
                 />
             ))}
+        </div>
+
+        <div className='flex justify-end'>
+            {totalPages > 1 && <Pagination siblingCount={5} totalPages={totalPages} onPageChange={setPage}/>}
         </div>
 
         
         <DiscountModal
             setData={setData}
+            setDisTotalPage={setTotalPages}
         />
     </div>
   )

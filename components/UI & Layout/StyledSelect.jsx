@@ -1,3 +1,5 @@
+'use client'
+
 import Arrow from '@/public/icons/arrow.svg';
 import { useState } from 'react';
 import OutsideClickHandler from 'react-outside-click-handler'

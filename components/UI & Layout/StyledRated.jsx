@@ -1,3 +1,5 @@
+'use client'
+
 import { Rating } from "@mui/material"
 import Heart from '../../public/icons/heartfill.svg' 
 import EmptyHeart from '../../public/icons/heart.svg' 

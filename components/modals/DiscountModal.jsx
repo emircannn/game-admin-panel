@@ -10,10 +10,12 @@ import Input from '../UI & Layout/Form/Input';
 import { getDiscountedGames, getGames } from '@/utils/Requests';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import Pagination from '../UI & Layout/Pagination';
 
 
 const DiscountModal = ({
-    setData
+    setData,
+    setDisTotalPage
 }) => {
 
     const discountModal = useDiscountModal()
@@ -40,10 +42,8 @@ const DiscountModal = ({
     const [gameData, setGameData] = useState([])
     const [games, setGames] = useState([])
     const [discountRate, setDiscountRate] = useState()
-
-    useEffect(() => {
-        getGames(setGameData);
-    }, [])
+    const [page, setPage] = useState(1)
+    const [totalPages, setTotalPages] = useState()
 
     const handleSelectedGames = (e) => {
         const item = e.target.value;
@@ -93,7 +93,13 @@ const DiscountModal = ({
     const body = (
     <div className='flex gap-[20px] w-full'>
         <div className='flex flex-col w-[550px] gap-[10px]'>
-                <FilterSide/>
+                <FilterSide
+                    page={page}
+                    setData={setGameData}
+                    setPage={setPage}
+                    setTotalPages={setTotalPages}
+                    totalPages={totalPages}
+                />
                 <div className='w-full h-[270px] 1336:h-[350px] overflow-y-auto flex flex-col gap-[10px] pr-[10px]'>
                     {gameData?.map((game, i) => (
                         <Game
@@ -101,6 +107,15 @@ const DiscountModal = ({
                             data={game}
                         />
                     ))}
+                </div>
+                <div className='flex justify-end'>
+                {totalPages > 1 && <Pagination 
+                siblingCount={5} 
+                totalPages={totalPages} 
+                onPageChange={setPage}
+                size='35px'
+                textSize='13px'
+                />}
                 </div>
 
                 <div className='flex items-center justify-between w-full mt-[5px]'>
@@ -159,9 +174,11 @@ const DiscountModal = ({
         })
         toast.success(res?.data?.message, {position: 'bottom-right'})
         setLoading(false)
-        getDiscountedGames(setData)
+        getDiscountedGames(setData, setDisTotalPage)
         discountModal.onClose()
-            }
+        setGames([])
+        setDiscountDate([{startDate: new Date(),endDate: new Date(),key: 'selection'}])
+    }
             else {
                 toast.error('Zorunlu Alanları doldurunuz.', {position: 'bottom-right'})
             }

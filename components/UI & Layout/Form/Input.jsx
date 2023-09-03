@@ -1,3 +1,4 @@
+'use client'
 import tailwindConfig from "@/tailwind.config"
 
 const Input = ({

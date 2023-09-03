@@ -2,38 +2,29 @@
 import { useState, useEffect } from 'react';
 import FilterSide from '@/components/Pages/Game/FilterSide'
 import Game from './Game';
-import { toast } from 'react-hot-toast';
-import axios from 'axios';
 import Loading from '@/components/UI & Layout/Loading';
 import ConfirmDeleteModal from '@/components/modals/ConfirmDeleteModal';
+import Pagination from '@/components/UI & Layout/Pagination';
+import { getGames } from '@/utils/Requests';
 
 const GamePage = () => {
 
   const [data, setData] = useState()
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState()
   const [isOpen, setIsOpen] = useState(false)
   const [selectedGame, setSelectedGame] = useState()
-
-  useEffect(() => {
-    const getData = async () => {
-        try {
-          const token = sessionStorage.getItem('adminToken');
-          const res = await axios.get(`${process.env.REQUEST}admin/allGames`,  {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-          setData(res?.data?.data)
-        } catch (error) {
-          toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
-        }
-    }
-    getData()
-  }, [])
 
   const handleDeleteModal = (data) => {
     setIsOpen(true)
     setSelectedGame(data)
   }
+
+  useEffect(() => {
+    getGames(setData,setTotalPages, page)
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   if(!data) {
     return <Loading/>
@@ -41,7 +32,12 @@ const GamePage = () => {
 
   return (
     <div className="flex flex-col gap-[30px] w-full">
-      <FilterSide/>
+      <FilterSide
+      setData={setData}
+      setTotalPages={setTotalPages}
+      page={page}
+      setPage={setPage}
+      />
 
       <div className='flex flex-col gap-[20px] w-full'>
         {data?.length > 0 ?
@@ -57,6 +53,10 @@ const GamePage = () => {
               Henüz oyun eklemediniz...
           </div>
           }
+      </div>
+
+      <div className='flex justify-end'>
+          {totalPages > 1 && <Pagination siblingCount={5} totalPages={totalPages} onPageChange={setPage}/>}
       </div>
 
       <ConfirmDeleteModal

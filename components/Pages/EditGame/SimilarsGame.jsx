@@ -4,6 +4,7 @@ import Image from "next/image";
 import FilterSide from "../Game/FilterSide";
 import { useEffect, useState } from "react";
 import { getGames } from "@/utils/Requests";
+import Pagination from "@/components/UI & Layout/Pagination";
 
 const SimilarsGame = ({
     handleSimilarGames,
@@ -11,10 +12,12 @@ const SimilarsGame = ({
 }) => {
 
     const [gameData, setGameData] = useState([])
+    const [page, setPage] = useState(1)
+    const [totalPages, setTotalPages] = useState(1)
 
     useEffect(() => {
-        getGames(setGameData);
-    }, [])
+        getGames(setGameData,setTotalPages,page);
+    }, [page])
 
     const Game = ({
         handleSimilarGames,
@@ -61,6 +64,10 @@ const SimilarsGame = ({
 
         <FilterSide
             noSecondAction
+            page={page}
+            setData={setGameData}
+            setPage={setPage}
+            setTotalPages={setTotalPages}
         />
 
         <div className="grid grid-cols-2 gap-[20px] max-h-[400px] overflow-y-auto pr-[10px]">
@@ -73,6 +80,16 @@ const SimilarsGame = ({
                 />
             ))}
         </div>
+
+        <div className='flex justify-end'>
+          {totalPages > 1 && 
+          <Pagination 
+          size="35px"
+          textSize="13px"
+          siblingCount={5} 
+          totalPages={totalPages} 
+          onPageChange={setPage}/>}
+      </div>
     </div>
   )
 }

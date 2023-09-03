@@ -1,4 +1,4 @@
-
+'use client'
 const Button = ({
   title,
   px= '30',

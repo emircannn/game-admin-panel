@@ -14,9 +14,9 @@ export const categoriesOptions = [
     {label: 'Çok Oyunculu', value: '7'},
 ]
 export const sortOptions = [
-    {label: 'Artan Fiyat', value: 'price'},
-    {label: 'Azalan Fiyat', value: 'priceasc'},
-    {label: 'Yükek İndirim', value: 'discounted'},
+    {label: 'Artan Fiyat', value: 'priceasc'},
+    {label: 'Azalan Fiyat', value: 'price'},
+    {label: 'Yükek İndirim', value: 'discount'},
     {label: 'Yeni', value: 'new'},
     {label: 'Eski', value: 'old'},
     {label: 'Yüksek Değerlendirme', value: 'reviews'},

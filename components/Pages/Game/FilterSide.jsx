@@ -1,16 +1,21 @@
 'use client';
 
 import StyledSelect from "@/components/UI & Layout/StyledSelect";
-import {categoriesOptions,platformOptions,sortOptions,stockOptions} from './filter.js'
+import {platformOptions,sortOptions,stockOptions} from './filter.js'
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from 'react';
 import Input from "@/components/UI & Layout/Form/Input.jsx";
 import Button from "@/components/UI & Layout/Form/Button.jsx";
-import tailwindConfig from "@/tailwind.config.js";
+import { getCategory, getGames } from "@/utils/Requests.js";
 
 
 const FilterSide = ({
-  noSecondAction=false
+  noSecondAction=false,
+  setData,
+  setTotalPages,
+  page,
+  setPage,
+  totalPages
 }) => {
 
     const {push} = useRouter()
@@ -19,14 +24,16 @@ const FilterSide = ({
     const sort = search.get('sort')
     const category = search.get('category')
     const platform = search.get('platform')
-    const stock = search.get('stock')
+    const stok = search.get('stok')
     const name = search.get('name')
 
     const [platformFilter, setPlatformFilter] = useState(platform)
     const [categoryFilter, setCategoryFilter] = useState(category)
     const [sortFilter, setSortFilter] = useState(sort)
-    const [stockFilter, setStockFilter] = useState(stock)
+    const [stokFilter, setStokFilter] = useState(stok)
     const [searchInput, setSearchInput] = useState(name ? name : '')
+  
+    const [categories, setCategories] = useState()
 
     useEffect(() => {
         const updateURLQueryParams = () => {
@@ -40,8 +47,8 @@ const FilterSide = ({
             if (platformFilter) {
               queryParams.push(`platform=${platformFilter}`);
             }
-            if (stockFilter) {
-              queryParams.push(`stock=${stockFilter}`);
+            if (stokFilter) {
+              queryParams.push(`stock=${stokFilter}`);
             }
             if (searchInput) {
               queryParams.push(`name=${searchInput}`);
@@ -49,7 +56,7 @@ const FilterSide = ({
         
             const newURL = `${window.location.pathname}?${queryParams.join('&')}`;
             
-            if (categoryFilter || platformFilter || sortFilter || stockFilter || searchInput) {
+            if (categoryFilter || platformFilter || sortFilter || stokFilter || searchInput) {
                 window.history.replaceState({}, '', newURL);
                 push(newURL)
             }
@@ -57,7 +64,7 @@ const FilterSide = ({
 
           updateURLQueryParams()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [categoryFilter, platformFilter, sortFilter, stockFilter, searchInput])
+    }, [categoryFilter, platformFilter, sortFilter, stokFilter, searchInput])
 
     const clearFilter = () => {
         const newURL = `${window.location.pathname}?`;
@@ -65,9 +72,26 @@ const FilterSide = ({
         setPlatformFilter()
         setSortFilter()
         setCategoryFilter()
-        setStockFilter()
+        setStokFilter()
         setSearchInput('')
     }
+
+    useEffect(() => {
+      getCategory(setCategories)
+    }, [])
+    
+  const categoriesOptions =
+      categories?.map((category) => (
+        {label: category?.name, value: category?.seo}
+      ))
+
+      useEffect(() => {
+        getGames(setData,setTotalPages, page, sortFilter, categoryFilter, platformFilter, stokFilter, searchInput)
+        if(totalPages === 1) {
+          setPage(1)
+        }
+      }, [categoryFilter, searchInput, page, platformFilter, sortFilter, stokFilter, totalPages, setTotalPages, setPage, setData])
+  
 
   return (
     <>
@@ -100,8 +124,8 @@ const FilterSide = ({
                 dropdownHeight='90px'
                 width='100%'
                 options={stockOptions}
-                setValue={setStockFilter}
-                value={stock}
+                setValue={setStokFilter}
+                value={stok}
                 placeholder='Stok Durumu'
             />
       </div>

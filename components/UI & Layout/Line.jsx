@@ -1,4 +1,4 @@
-import tailwindConfig from "@/../tailwind.config";
+'use client'
 
 const Line = ({
   title,

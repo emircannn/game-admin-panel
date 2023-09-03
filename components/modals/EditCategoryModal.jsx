@@ -118,7 +118,7 @@ const EditCategoryModal = ({
         isOpen={categoryModal}
         onClose={() => setCategoryModal(false)}
         title='Kategori Düzenle'
-        actionLabel='Kategori Oluştur'
+        actionLabel='Kategori Düzenle'
         onSubmit={() => handleUpdate()}
         body={body}
         width='auto'
