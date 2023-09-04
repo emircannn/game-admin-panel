@@ -9,7 +9,8 @@ import { dateFormater } from "@/utils/helper";
 
 
 const User = ({
-    data
+    data,
+    onDelete
 }) => {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -35,7 +36,9 @@ const User = ({
             </span>
 
             <div className="flex items-center justify-end gap-[20px] pr-[20px]">
-                <button className="w-[40px] h-[40px] rounded-xl bg-graident-dark text-white flex items-center justify-center duration-300 hover:bg-secondary">
+                <button 
+                onClick={onDelete}
+                className="w-[40px] h-[40px] rounded-xl bg-graident-dark text-white flex items-center justify-center duration-300 hover:bg-secondary">
                     <BsFillTrash3Fill size={20}/>
                 </button>
 
@@ -62,7 +65,7 @@ const User = ({
                             <Image alt="" src={game?.coverImage} priority fill quality={100} className="object-cover hover:scale-110 duration-300"/>
                         </div>
 
-                        <span>{game?.name}</span>
+                        <span className="line-clamp-1 flex items-center w-full">{game?.name}</span>
                     </div>
                     )) : 
                     <div className="text-[12px] font-semibold text-white absolute left-0 top-4 w-full text-center">
@@ -84,7 +87,7 @@ const User = ({
                             <Image alt="" src={user?.image} priority fill quality={100} className="object-cover hover:scale-110 duration-300"/>
                         </div>
 
-                        <span>{user?.name}</span>
+                        <span className="line-clamp-1 flex items-center w-full">{user?.name}</span>
                     </div>
                     )) : 
                     <div className="text-[12px] font-semibold text-white absolute left-0 top-4 w-full text-center">
@@ -106,7 +109,7 @@ const User = ({
                             <Image alt="" src={game?.coverImage} priority fill quality={100} className="object-cover hover:scale-110 duration-300"/>
                         </div>
 
-                        <span>{game?.name}</span>
+                        <span className="line-clamp-1 flex items-center w-full">{game?.name}</span>
                     </div>
                     )) : 
                     <div className="text-[12px] font-semibold text-white absolute left-0 top-4 w-full text-center">

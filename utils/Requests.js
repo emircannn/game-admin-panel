@@ -65,3 +65,24 @@ export const getUsers = async (setData) => {
         toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
     }
   }
+
+export const getFirstBanner = async (setData, setId) => {
+    try {
+        const res = await axios.get(`${process.env.REQUEST}admin/getFirstBanner`)
+        setData(res?.data?.data.firstBanner)
+        setId ? setId(res?.data?.data?._id) : null
+    } catch (error) {
+        toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
+    }
+  }
+export const getSecondBanner = async (setData, setId) => {
+    try {
+        const res = await axios.get(`${process.env.REQUEST}admin/getSecondBanner`)
+        setData(res?.data?.data.secondBanner)
+        setId ? setId(res?.data?.data?._id) : null
+    } catch (error) {
+        toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
+    }
+  }
+
+  

@@ -6,6 +6,8 @@ import Heads from "./Heads";
 import User from "./User";
 import { getUsers } from "@/utils/Requests";
 import Loading from "@/components/UI & Layout/Loading";
+import { toast } from "react-hot-toast";
+import axios from "axios";
 
 
 const UsersPage = () => {
@@ -15,6 +17,20 @@ const UsersPage = () => {
   useEffect(() => {
     getUsers(setData)
   }, [])
+
+  const handleDeleteUser = async(id) => {
+    try {
+      const token = sessionStorage.getItem('adminToken');
+      const res = await axios.post(`${process.env.REQUEST}admin/deleteUser?id=${id}`, {}, {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      })
+      toast.success(res?.data?.message, {position: 'bottom-right'})
+    } catch (error) {
+      toast.error(error.response?.message?.split(':')[1] || error.response?.message, {position: 'bottom-right'})
+    }
+  }
   
   if(!data) {
     return <Loading/>
@@ -22,10 +38,7 @@ const UsersPage = () => {
 
   return (
     <div className="flex flex-col gap-[20px]">
-        <FilterSide
-            noSecondAction
-        />
-
+        
         <Heads/>
 
         <div className="flex flex-col gap-[20px]">
@@ -33,6 +46,7 @@ const UsersPage = () => {
               <User
                 key={i}
                 data={user}
+                onDelete={() => handleDeleteUser(user?._id)}
               />
             ))}
         </div>

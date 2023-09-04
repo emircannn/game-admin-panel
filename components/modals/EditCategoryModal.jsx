@@ -117,8 +117,8 @@ const EditCategoryModal = ({
     <Modal
         isOpen={categoryModal}
         onClose={() => setCategoryModal(false)}
-        title='Kategori Düzenle'
-        actionLabel='Kategori Düzenle'
+        title='Kategori Güncelle'
+        actionLabel='Kategoriyi Güncelle'
         onSubmit={() => handleUpdate()}
         body={body}
         width='auto'
