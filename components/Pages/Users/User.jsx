@@ -87,7 +87,7 @@ const User = ({
                             <Image alt="" src={user?.image} priority fill quality={100} className="object-cover hover:scale-110 duration-300"/>
                         </div>
 
-                        <span className="line-clamp-1 flex items-center w-full">{user?.name}</span>
+                        <span className="line-clamp-1 flex items-center w-full">{user?.username}</span>
                     </div>
                     )) : 
                     <div className="text-[12px] font-semibold text-white absolute left-0 top-4 w-full text-center">

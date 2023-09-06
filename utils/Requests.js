@@ -52,15 +52,50 @@ export const getDiscountedGames = async (setData, setTotalPages, page) => {
     }
   }
 
-export const getUsers = async (setData) => {
+export const getUsers = async (setData,page, setTotalPages) => {
     try {
+        let queryParams = '';
+        if (page) queryParams += `?page=${page}`;
         const token = sessionStorage.getItem('adminToken');
-        const res = await axios.get(`${process.env.REQUEST}user/getAll`, {
+        const res = await axios.get(`${process.env.REQUEST}user/getAll${queryParams}`, {
             headers: {
                 Authorization: 'Bearer ' + token
             }
         })
         setData(res?.data?.data)
+        setTotalPages(res?.data?.totalPages)
+    } catch (error) {
+        toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
+    }
+  }
+export const getOrders = async (setData,page, setTotalPages) => {
+    try {
+        let queryParams = '';
+        if (page) queryParams += `?page=${page}`;
+        const token = sessionStorage.getItem('adminToken');
+        const res = await axios.get(`${process.env.REQUEST}order/getAll${queryParams}`, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+        setData(res?.data?.data)
+        setTotalPages(res?.data?.totalPages)
+    } catch (error) {
+        toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
+    }
+  }
+export const getCarts = async (setData,page, setTotalPages) => {
+    try {
+        let queryParams = '';
+        if (page) queryParams += `?page=${page}`;
+        const token = sessionStorage.getItem('adminToken');
+        const res = await axios.get(`${process.env.REQUEST}cart/getAll${queryParams}`, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+        setData(res?.data?.data)
+        setTotalPages(res?.data?.totalPages)
     } catch (error) {
         toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
     }
@@ -84,5 +119,3 @@ export const getSecondBanner = async (setData, setId) => {
         toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
     }
   }
-
-  

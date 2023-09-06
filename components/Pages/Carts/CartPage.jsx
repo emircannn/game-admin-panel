@@ -7,26 +7,17 @@ import Heads from "./Heads"
 import axios from "axios"
 import { toast } from "react-hot-toast"
 import Loading from "@/components/UI & Layout/Loading"
+import { getCarts } from "@/utils/Requests"
+import Pagination from "@/components/UI & Layout/Pagination"
 
 const CartPage = () => {
   const [data, setData] = useState()
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState()
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const token = sessionStorage.getItem('adminToken');
-        const res = await axios.get(`${process.env.REQUEST}cart/getAll`, {
-            headers: {
-                Authorization: 'Bearer ' + token
-            }
-        })
-        setData(res?.data?.data)
-      } catch (error) {
-        toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
-      }
-    }
-    getData()
-  }, [])
+    getCarts(setData, page, setTotalPages)
+  }, [page])
 
   if(!data) {
     return <Loading/>
@@ -44,6 +35,10 @@ const CartPage = () => {
             />
           ))}
         </div>
+
+        <div className='flex justify-end'>
+          {totalPages > 1 && <Pagination siblingCount={5} totalPages={totalPages} onPageChange={setPage}/>}
+      </div>
     </div>
   )
 }

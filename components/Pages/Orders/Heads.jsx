@@ -14,10 +14,10 @@ const Heads = () => {
             Kullanıcı Adı
             </div>
             <div className="w-full flex items-center justify-center text-[14px] font-semibold text-white">
-            Email
+            Sepet Tutarı
             </div>
             <div className="w-full flex items-center justify-center text-[14px] font-semibold text-white">
-            Sepet Tutarı
+            Sipariş Durumu
             </div>
             <div className="w-full flex items-center justify-center text-[14px] font-semibold text-white">
             Sipariş Tarihi

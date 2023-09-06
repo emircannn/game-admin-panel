@@ -1,22 +1,24 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import FilterSide from "../Game/FilterSide";
 import Heads from "./Heads";
 import User from "./User";
 import { getUsers } from "@/utils/Requests";
 import Loading from "@/components/UI & Layout/Loading";
 import { toast } from "react-hot-toast";
 import axios from "axios";
+import Pagination from "@/components/UI & Layout/Pagination";
 
 
 const UsersPage = () => {
 
   const [data, setData] = useState()
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState()
 
   useEffect(() => {
-    getUsers(setData)
-  }, [])
+    getUsers(setData, page, setTotalPages)
+  }, [page])
 
   const handleDeleteUser = async(id) => {
     try {
@@ -50,6 +52,10 @@ const UsersPage = () => {
               />
             ))}
         </div>
+
+        <div className='flex justify-end'>
+          {totalPages > 1 && <Pagination siblingCount={5} totalPages={totalPages} onPageChange={setPage}/>}
+      </div>
     </div>
   )
 }
