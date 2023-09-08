@@ -37,7 +37,7 @@ const nextConfig = {
         REQUEST: process.env.REQUEST,
       },
       images: {
-        domains: ['localhost']
+        domains: ['localhost', 'game-backend-server.onrender.com']
       },
 }
 
