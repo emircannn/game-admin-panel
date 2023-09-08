@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react"
+import NextNProgress from 'nextjs-progressbar';
 
 const ClientOnly = ({children}) => {
 
@@ -17,6 +18,7 @@ const ClientOnly = ({children}) => {
 
   return (
     <>
+    <NextNProgress color="#8585f5" startPosition={0.3} stopDelayMs={200} height={3} showOnShallow={true} />
         {children}
     </>
   )

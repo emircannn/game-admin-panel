@@ -1,6 +1,7 @@
 'use client';
 
 import ClientOnly from "@/components/ClientOnly";
+import SettingsPage from "@/components/Pages/Settings";
 import { AuthContext } from "@/context/authContext";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
@@ -19,7 +20,7 @@ const Page = () => {
     }, [auth, pathname, push])
   return (
     <ClientOnly>
-    <div>Page</div>
+    <SettingsPage/>
     </ClientOnly>
   )
 }

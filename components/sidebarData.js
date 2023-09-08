@@ -7,6 +7,7 @@ import Reviews from '@/public/icons/reviews.svg';
 import Orders from '@/public/icons/orders.svg';
 import Settings from '@/public/icons/settings.svg';
 import Logout from '@/public/icons/logout.svg';
+import Request from '@/public/icons/requests.svg';
 
 const data = [
     {
@@ -50,6 +51,12 @@ const data = [
       href: "/ayarlar",
       icon: <Settings />,
       color: "#b6b6f8",
+    },
+    {
+      title: "Destek",
+      href: "/destek",
+      icon: <Request />,
+      color: "#a03d3d",
     },
     {
       title: "Çıkış Yap",

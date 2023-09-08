@@ -6,6 +6,7 @@ import Order from "./Order"
 import { getOrders } from "@/utils/Requests"
 import Pagination from "@/components/UI & Layout/Pagination"
 import Loading from "@/components/UI & Layout/Loading"
+import { useSocket } from "@/utils/socket"
 
 const OrdersPage = () => {
   const [data, setData] = useState()
@@ -15,6 +16,21 @@ const OrdersPage = () => {
   useEffect(() => {
     getOrders(setData, page, setTotalPages)
   }, [page])
+
+  const socket = useSocket(); 
+    useEffect(() => {
+        if (!socket) return;
+
+        socket.on('notification', (data) => {
+          const audio = new Audio('/sounds/sound1.mp3');
+          audio.play();
+          getOrders(setData, page, setTotalPages)
+        })
+    
+    return () => {
+        socket.off('notification')
+    }
+    }, [page, socket])
 
   if(!data) {
     return <Loading/>

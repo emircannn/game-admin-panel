@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import gameData from '../oyunData'
 import useLogoutModal from '@/hooks/useLogout'
+import { useSocket } from '@/utils/socket'
+import { toast } from 'react-hot-toast'
 
 const Sidebar = () => {
 
@@ -22,6 +24,35 @@ const Sidebar = () => {
     }, [pathname])
     
     const currentPage = currentData?.find((item) => item.href === pathname)
+
+    const socket = useSocket(); 
+    useEffect(() => {
+        if (!socket) return;
+
+        socket.on('notification', (data) => {
+          const audio = new Audio('/sounds/sound2.mp3');
+          audio.play();
+          toast.success(data, {position: 'bottom-right', duration: 5000})
+        })
+    
+    return () => {
+        socket.off('notification')
+    }
+    }, [socket])
+
+    useEffect(() => {
+        if (!socket) return;
+
+        socket.on('order', (data) => {
+          const audio = new Audio('/sounds/sound2.mp3');
+          audio.play();
+          toast.success(data, {position: 'bottom-right', duration: 5000})
+        })
+    
+    return () => {
+        socket.off('order')
+    }
+    }, [socket])
 
     if(pathname === '/oturum') {
       return null

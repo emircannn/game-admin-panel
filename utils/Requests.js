@@ -119,3 +119,33 @@ export const getSecondBanner = async (setData, setId) => {
         toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
     }
   }
+
+  export const getReviews = async (setData,page,limit,setTotalPages) => {
+    try {
+        let queryParams = ''; 
+        if (page) queryParams += `page=${page}`;
+        if (limit) queryParams += `${queryParams ? '&' : ''}limit=${limit}`;
+        const res = await axios.get(`${process.env.REQUEST}review/getAll?${queryParams}`)
+        setData(res?.data?.data)
+        setTotalPages && setTotalPages(res?.data?.totalPages)
+    } catch (error) {
+        toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
+    }
+}
+  export const getChats = async (setData,page,filter,setTotalPages) => {
+    try {
+        let queryParams = ''; 
+        if (page) queryParams += `page=${page}`;
+        if (filter) queryParams += `${queryParams ? '&' : ''}filter=${filter}`;
+        const token = sessionStorage.getItem('adminToken');
+        const res = await axios.get(`${process.env.REQUEST}chat/getAll?${queryParams}`, {
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+        })
+        setData(res?.data?.data)
+        setTotalPages(res?.data?.totalPages)
+    } catch (error) {
+        toast.error(error?.response?.data?.message.split(':')[1] || error?.response?.data?.message, {position: 'bottom-right'})
+    }
+}

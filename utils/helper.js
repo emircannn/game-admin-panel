@@ -13,6 +13,11 @@ export const formatter = new Intl.NumberFormat('tr-TR', {
     minimumFractionDigits: 2,
   });
 
+  export function messageDate(date) {
+    return moment(date).format('DD.MM.YYYY HH:mm');
+  }
+  
+  
   export function calculateRemainingTime(targetDate) {
     const targetDateMilliseconds = new Date(targetDate).getTime();
   
