@@ -3,7 +3,7 @@ import socketClient from "socket.io-client";
 
 let socket
 
-const SERVER = 'http://localhost:5000'
+const SERVER = 'https://game-backend-server.onrender.com'
 
 export const connectWebSocket =()=> {
     socket = socketClient(SERVER)
