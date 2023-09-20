@@ -32,7 +32,6 @@ export default function RootLayout({ children }) {
       <FirstBannerModal/>
       <SecBannerModal/>
       <Toaster/>
-      
       <div className='h-[calc(100vh_-_106px)] overflow-y-auto p-[20px] w-full'>
         {children}
       </div>
@@ -40,5 +39,6 @@ export default function RootLayout({ children }) {
       </body>
     </html>
     </AuthContextProvider>
+
   )
 }

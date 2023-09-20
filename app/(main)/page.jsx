@@ -4,20 +4,19 @@ import { AuthContext } from "@/context/authContext";
 import { dateFormater } from "@/utils/helper";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
-
+import {redirect} from 'next/navigation'
 export default function Home() {
 
   const {auth} = useContext(AuthContext)
-  const {push} = useRouter()
   const pathname = usePathname()
 
     useEffect(() => {
         if(pathname !== '/oturum') {
             if(!auth) {
-                push('/oturum')
+              redirect('/oturum')
             }
         }
-    }, [auth, pathname, push])
+    }, [auth, pathname])
 
     const date = dateFormater(Date.now())
 
